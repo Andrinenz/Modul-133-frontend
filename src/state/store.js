@@ -2,25 +2,19 @@
 /* IMPORTS                                                                    */
 /*----------------------------------------------------------------------------*/
 
-import { Route, Routes } from 'react-router';
-import './App.css';
-import Login from './pages/Login/Login';
+import { configureStore } from '@reduxjs/toolkit';
+import userReducer from './user/userSlice.js';
 
 /*----------------------------------------------------------------------------*/
-/* App                                                                        */
+/* store                                                                      */
 /*----------------------------------------------------------------------------*/
 
-const App = () => {
-  return (
-    <div className='whole-page'>
-      <Routes>
-        <Route path='login' element={<Login />} />
-      </Routes>
-    </div>
-  );
-};
+export const store = configureStore({
+  reducer: {
+    user: userReducer,
+  },
+});
 
 /*----------------------------------------------------------------------------*/
 /* EXPORTS                                                                    */
 /*----------------------------------------------------------------------------*/
-export default App;

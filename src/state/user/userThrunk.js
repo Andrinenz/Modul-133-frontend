@@ -2,25 +2,29 @@
 /* IMPORTS                                                                    */
 /*----------------------------------------------------------------------------*/
 
-import { Route, Routes } from 'react-router';
-import './App.css';
-import Login from './pages/Login/Login';
+import { logoutUser, setAccessToken, setUser } from './userSlice';
+
+import { extractToken } from '../../libs/extractToken.js';
 
 /*----------------------------------------------------------------------------*/
-/* App                                                                        */
+/* userThrunk                                                                 */
 /*----------------------------------------------------------------------------*/
 
-const App = () => {
-  return (
-    <div className='whole-page'>
-      <Routes>
-        <Route path='login' element={<Login />} />
-      </Routes>
-    </div>
-  );
+export const login = (email, password) => {
+  return (dispatch) => {
+    extractToken((valid, token, user) => {
+      console.log('Extract Token:', valid, user);
+      if (token === null || !valid) {
+        dispatch(logoutUser());
+      }
+      if (valid) {
+        dispatch(setAccessToken(token));
+        dispatch(setUser(user));
+      }
+    });
+  };
 };
 
 /*----------------------------------------------------------------------------*/
 /* EXPORTS                                                                    */
 /*----------------------------------------------------------------------------*/
-export default App;

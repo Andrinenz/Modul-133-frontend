@@ -2,25 +2,14 @@
 /* IMPORTS                                                                    */
 /*----------------------------------------------------------------------------*/
 
-import { Route, Routes } from 'react-router';
-import './App.css';
-import Login from './pages/Login/Login';
-
 /*----------------------------------------------------------------------------*/
-/* App                                                                        */
+/* userSelector                                                               */
 /*----------------------------------------------------------------------------*/
 
-const App = () => {
-  return (
-    <div className='whole-page'>
-      <Routes>
-        <Route path='login' element={<Login />} />
-      </Routes>
-    </div>
-  );
+export const getUser = (state) => {
+  return state.user;
 };
 
 /*----------------------------------------------------------------------------*/
 /* EXPORTS                                                                    */
 /*----------------------------------------------------------------------------*/
-export default App;
