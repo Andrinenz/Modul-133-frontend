@@ -33,14 +33,23 @@ export const ordersSlice = createSlice({
       let { id } = payload;
       state.orders = state.orders.filter((e) => e.id === id);
     },
-    updateOrderById: (state, { payload }) => {},
+    updateOrderById: (state, { payload }) => {
+      Object.keys(payload).forEach((key) => {
+        state.orderById[key] = payload[key];
+      });
+    },
   },
 });
 
 /*----------------------------------------------------------------------------*/
 /* EXPORTS                                                                    */
 /*----------------------------------------------------------------------------*/
-export const { deleteOrder, updateOrderById, setOrderById, setOrders } =
-  ordersSlice.actions;
+export const {
+  deleteOrder,
+  addOrder,
+  updateOrderById,
+  setOrderById,
+  setOrders,
+} = ordersSlice.actions;
 
 export default ordersSlice.reducer;

@@ -44,7 +44,12 @@ export const productsSlice = createSlice({
 /*----------------------------------------------------------------------------*/
 /* EXPORTS                                                                    */
 /*----------------------------------------------------------------------------*/
-export const { updateProductById, deleteProduct, addProduct, setProducts } =
-  productsSlice.actions;
+export const {
+  updateProductById,
+  setProductById,
+  deleteProduct,
+  addProduct,
+  setProducts,
+} = productsSlice.actions;
 
 export default productsSlice.reducer;
