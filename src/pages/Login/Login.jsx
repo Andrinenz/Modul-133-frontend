@@ -5,6 +5,7 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { login } from '../../state/user/userThrunk.js';
+import React from 'react';
 
 /*----------------------------------------------------------------------------*/
 /* Login                                                                      */
@@ -17,7 +18,8 @@ const Login = () => {
   const [passw, setPassw] = useState('');
 
   const handleOnClick = () => {
-    dispatch(login());
+    console.log(mail, passw);
+    dispatch(login(mail, passw));
   };
 
   return (
@@ -26,13 +28,13 @@ const Login = () => {
         type='text'
         name='email'
         id='email'
-        onChange={(e) => setMail(e.target)}
+        onChange={(e) => setMail(e.target.value)}
       />
       <input
         type='text'
         name='password'
         id='passw'
-        onChange={(e) => setPassw(e.target)}
+        onChange={(e) => setPassw(e.target.value)}
       />
       <button onClick={(e) => handleOnClick()}>Login</button>
     </div>
