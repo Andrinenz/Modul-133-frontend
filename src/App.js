@@ -10,6 +10,10 @@ import Homepage from './pages/Homepage/Homepage';
 import Login from './pages/Login/Login';
 import './cssClasses.scss';
 import 'antd/dist/reset.css';
+import RequireAuth from './assets/RequireAuth';
+import Products from './pages/Products/Products';
+import { getUser } from './state/user/userSelector';
+import { login } from './state/user/userThrunk';
 
 /*----------------------------------------------------------------------------*/
 /* App                                                                        */
@@ -17,14 +21,33 @@ import 'antd/dist/reset.css';
 
 const App = () => {
   const dispatch = useDispatch();
+  const { loaded } = useSelector(getUser);
+
+  useEffect(() => {
+    dispatch(login('', '', true));
+  }, [dispatch]);
 
   return (
-    <div className='whole-page'>
-      <Routes>
-        <Route index element={<Homepage />} />
-        <Route path='login' element={<Login />} />
-      </Routes>
-    </div>
+    <>
+      {loaded && (
+        <>
+          <div className='whole-page'>
+            <Routes>
+              <Route index element={<Homepage />} />
+              <Route path='login' element={<Login />} />
+              <Route
+                path='products'
+                element={
+                  <RequireAuth>
+                    <Products />
+                  </RequireAuth>
+                }
+              />
+            </Routes>
+          </div>
+        </>
+      )}
+    </>
   );
 };
 

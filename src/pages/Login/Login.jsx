@@ -18,8 +18,7 @@ const Login = () => {
   const [passw, setPassw] = useState('');
 
   const handleOnClick = () => {
-    console.log(mail, passw);
-    dispatch(login(mail, passw));
+    dispatch(login(mail, passw, false));
   };
 
   return (
