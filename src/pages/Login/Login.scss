@@ -1,0 +1,12 @@
+.container {
+  height: 100vh;
+}
+
+.box {
+  width: 40rem;
+  height: 30rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
