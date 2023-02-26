@@ -14,6 +14,7 @@ import RequireAuth from './assets/RequireAuth';
 import Products from './pages/Products/Products';
 import { getUser } from './state/user/userSelector';
 import { login } from './state/user/userThrunk';
+import Error404 from './pages/Error404/Error404';
 
 /*----------------------------------------------------------------------------*/
 /* App                                                                        */
@@ -43,6 +44,7 @@ const App = () => {
                   </RequireAuth>
                 }
               />
+              <Route path='*' element={<Error404 />} />
             </Routes>
           </div>
         </>
