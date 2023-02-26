@@ -8,7 +8,7 @@
 
 const Homepage = () => {
   return (
-    <div>
+    <div className=''>
       <h1>Homepage </h1>
     </div>
   );
