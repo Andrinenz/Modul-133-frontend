@@ -22,6 +22,12 @@ export const userSlice = createSlice({
       state.isLoggedIn = true;
     },
     setUser: (state, { payload }) => {
+      let obj = payload;
+      delete obj.accessToken;
+      delete obj.password;
+      delete obj.iat;
+      delete obj.exp;
+
       state.user = payload;
       state.isLoggedIn = true;
       state.loaded = true;

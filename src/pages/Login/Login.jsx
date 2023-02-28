@@ -10,6 +10,8 @@ import './Login.scss';
 import { Button, Input } from 'antd';
 import { User } from '@carbon/icons-react';
 import { useNavigate } from 'react-router';
+import validator from 'validator';
+import AddUserModal from './assets/AddUserModal.jsx';
 
 /*----------------------------------------------------------------------------*/
 /* Login                                                                      */
@@ -21,16 +23,27 @@ const Login = () => {
 
   const [mail, setMail] = useState('');
   const [passw, setPassw] = useState('');
+  const [modalOpen, setModalOpen] = useState(false);
 
   const handleOnClick = () => {
-    dispatch(login(mail, passw, false));
-    navigate('/products');
+    dispatch(login(mail, passw, false, navigate, dispatch));
   };
 
-  console.log(mail);
+  const handleModalOpen = () => {
+    setModalOpen(true);
+  };
+
+  const handleModalClose = () => {
+    setModalOpen(false);
+    return;
+  };
 
   return (
     <div className='d-flex f-jc pt-6'>
+      <AddUserModal
+        modalOpen={modalOpen}
+        onClose={handleModalClose.bind(this)}
+      />
       <div className='cds--col-lg-9 pl-4 pr-4 box'>
         <div className='pt-3'>
           <div className='d-flex f-jc'>
@@ -44,8 +57,22 @@ const Login = () => {
               placeholder='email'
               prefix={<User />}
               size={'large'}
+              status={
+                mail !== ''
+                  ? !validator.isEmail(mail) || mail.trim() === ''
+                    ? 'error'
+                    : ''
+                  : ''
+              }
               onChange={(e) => setMail(e.target.value)}
             />
+            {mail !== '' ? (
+              !validator.isEmail(mail) || mail.trim() === '' ? (
+                <div className='pt-1' style={{ color: '#ff4d4f' }}>
+                  <h6>Field has to be an email</h6>
+                </div>
+              ) : null
+            ) : null}
           </div>
           <div className='pt-3'>
             <div>
@@ -60,12 +87,19 @@ const Login = () => {
         </div>
         <div className='d-flex f-je pt-3'>
           <div className='mr-2'>
-            <Button size='large'>Sign up</Button>
+            <Button size='large' onClick={() => handleModalOpen()}>
+              Sign up
+            </Button>
           </div>
           <div>
             <Button
               type='primary'
               size={'large'}
+              disabled={
+                validator.isEmail(mail) && mail !== '' && passw !== ''
+                  ? false
+                  : true
+              }
               onClick={() => handleOnClick()}
             >
               Login
