@@ -15,6 +15,7 @@ import Products from './pages/Products/Products';
 import { getUser } from './state/user/userSelector';
 import { login } from './state/user/userThrunk';
 import Error404 from './pages/Error404/Error404';
+import MainHeader from './pages/MainHeader/MainHeader';
 
 /*----------------------------------------------------------------------------*/
 /* App                                                                        */
@@ -33,6 +34,7 @@ const App = () => {
       {loaded && (
         <>
           <div className='whole-page'>
+            <MainHeader />
             <Routes>
               <Route index element={<Homepage />} />
               <Route path='login' element={<Login />} />
