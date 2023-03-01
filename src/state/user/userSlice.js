@@ -32,6 +32,11 @@ export const userSlice = createSlice({
       state.isLoggedIn = true;
       state.loaded = true;
     },
+    setUserCreate: (state, { payload }) => {
+      state.user = payload;
+      state.isLoggedIn = true;
+      state.loaded = true;
+    },
     logoutUser: (state) => {
       state.isLoggedIn = false;
       state.accessToken = '';

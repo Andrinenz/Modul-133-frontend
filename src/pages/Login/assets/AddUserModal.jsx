@@ -2,21 +2,34 @@
 /* IMPORTS                                                                    */
 /*----------------------------------------------------------------------------*/
 
-import { Input, Modal } from 'antd';
+import { Button, Input, Modal } from 'antd';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router';
+import { fetchCreateUser } from '../../../state/user/userThrunk.js';
+import validator from 'validator';
 
 /*----------------------------------------------------------------------------*/
 /* AdduserModal                                                               */
 /*----------------------------------------------------------------------------*/
 
 const AddUserModal = (props) => {
-  const [data, setData] = useState({
+  let defaultData = {
     firstname: '',
     lastname: '',
     password: '',
     isAdmin: false,
     email: '',
-  });
+  };
+
+  const handleOnClose = () => {
+    props.handleModalClose();
+  };
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const [data, setData] = useState({ ...defaultData });
 
   const handleKeyUp = (event, type, inputType) => {
     let dataTemp = { ...data };
@@ -30,15 +43,41 @@ const AddUserModal = (props) => {
     setData(dataTemp);
   };
 
-  console.log(data);
+  const handleSubmit = () => {
+    dispatch(fetchCreateUser(data, navigate));
+  };
+
+  const disableBtn = () => {
+    if (
+      validator.isEmail(data.email) &&
+      data.email !== '' &&
+      data.firstname !== '' &&
+      data.lastname !== '' &&
+      data.password !== ''
+    ) {
+      return false;
+    } else return true;
+  };
 
   return (
     <div>
       <Modal
         title='Create user login'
         open={props.modalOpen}
-        onCancel={props.onClose}
-        okText='Submit'
+        onCancel={handleOnClose}
+        footer={
+          <div>
+            <Button onClick={handleOnClose}>Cancel</Button>
+            <Button
+              disabled={disableBtn()}
+              type='primary'
+              onClick={() => handleSubmit()}
+            >
+              Submit
+            </Button>
+          </div>
+        }
+        afterClose={() => setData(defaultData)}
       >
         <div className=''>
           <div className='d-flex bx-wrap f-jb mt-2'>
@@ -47,6 +86,7 @@ const AddUserModal = (props) => {
                 <h5>Firstname:</h5>
                 <Input
                   placeholder='firstname'
+                  value={data.firstname}
                   onChange={(e) => handleKeyUp(e, 'firstname', 'textinput')}
                   size={'large'}
                 />
@@ -57,6 +97,7 @@ const AddUserModal = (props) => {
                 <h5>Lastname:</h5>
                 <Input
                   placeholder='lastname'
+                  value={data.lastname}
                   onChange={(e) => handleKeyUp(e, 'lastname', 'textinput')}
                   size={'large'}
                 />
@@ -68,6 +109,7 @@ const AddUserModal = (props) => {
               <h5>Email:</h5>
               <Input
                 placeholder='email'
+                value={data.email}
                 onChange={(e) => handleKeyUp(e, 'email', 'textinput')}
                 size='large'
               />
@@ -76,6 +118,7 @@ const AddUserModal = (props) => {
               <h5>Password:</h5>
               <Input.Password
                 placeholder='password'
+                value={data.password}
                 onChange={(e) => handleKeyUp(e, 'password', 'textinput')}
                 size='large'
               />

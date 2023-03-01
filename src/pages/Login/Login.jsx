@@ -42,7 +42,7 @@ const Login = () => {
     <div className='d-flex f-jc pt-6'>
       <AddUserModal
         modalOpen={modalOpen}
-        onClose={handleModalClose.bind(this)}
+        handleModalClose={handleModalClose.bind(this)}
       />
       <div className='cds--col-lg-9 pl-4 pr-4 box'>
         <div className='pt-3'>

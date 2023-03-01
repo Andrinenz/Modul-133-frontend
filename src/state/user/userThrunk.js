@@ -7,6 +7,7 @@ import { addErrorNotification } from '../notification/notificationSlice.js';
 import validator from 'validator';
 import jwtDecode from 'jwt-decode';
 import axios from 'axios';
+import { axiosAuth } from '../../helpers/axios';
 
 /*----------------------------------------------------------------------------*/
 /* userThrunk                                                                 */
@@ -72,8 +73,39 @@ export const login = (email, password, start, navigate, dispatch) => {
     if (data.valid) {
       dispatch(setAccessToken(data.token));
       dispatch(setUser(data.user));
-      navigate('/products');
+      dispatch(navigate('/products'));
     }
+  };
+};
+
+export const fetchCreateUser = (obj, navigate) => {
+  return async (dispatch) => {
+    try {
+      let res = await axiosAuth.post('/api/auth/createUser', obj);
+
+      if (res.status === 201) {
+        if (res.data.token) {
+          console.log(res);
+          let token = res.data.token;
+
+          if (token !== null && validator.isJWT(token)) {
+            localStorage.setItem('accessToken', token);
+            let decodedUser = jwtDecode(token);
+            dispatch(logoutUser());
+            dispatch(setUser(decodedUser));
+            dispatch(setAccessToken(res.data.token));
+            dispatch(navigate('/products'));
+          }
+        } else {
+          dispatch(
+            addErrorNotification({
+              message: 'Error',
+              description: 'Failed while creating user',
+            })
+          );
+        }
+      }
+    } catch (err) {}
   };
 };
 
