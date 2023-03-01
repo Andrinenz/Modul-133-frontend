@@ -5,6 +5,7 @@
   "dependencies": {
     "@carbon/grid": "^11.11.0",
     "@carbon/icons-react": "^11.16.1",
+    "@carbon/react": "^1.23.1",
     "@carbon/styles": "^1.23.1",
     "@reduxjs/toolkit": "^1.9.3",
     "@testing-library/jest-dom": "^5.16.5",
