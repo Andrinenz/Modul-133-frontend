@@ -112,7 +112,21 @@ const AddUserModal = (props) => {
                 value={data.email}
                 onChange={(e) => handleKeyUp(e, 'email', 'textinput')}
                 size='large'
+                status={
+                  data.email !== ''
+                    ? !validator.isEmail(data.email) || data.email.trim() === ''
+                      ? 'error'
+                      : ''
+                    : ''
+                }
               />
+              {data.email !== '' ? (
+                !validator.isEmail(data.email) || data.email.trim() === '' ? (
+                  <div className='pt-1' style={{ color: '#ff4d4f' }}>
+                    <h6>Field has to be an email</h6>
+                  </div>
+                ) : null
+              ) : null}
             </div>
             <div className='mt-1 mb-2'>
               <h5>Password:</h5>
