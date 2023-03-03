@@ -16,6 +16,7 @@ import { getUser } from './state/user/userSelector';
 import { login } from './state/user/userThrunk';
 import Error404 from './pages/Error404/Error404';
 import Notification from './pages/Notification/Notification';
+import Dashboard from './pages/Dashboard/Dashboard';
 
 /*----------------------------------------------------------------------------*/
 /* App                                                                        */
@@ -43,6 +44,14 @@ const App = () => {
                 element={
                   <RequireAuth>
                     <Products />
+                  </RequireAuth>
+                }
+              />
+              <Route
+                path='dashboard'
+                element={
+                  <RequireAuth>
+                    <Dashboard />
                   </RequireAuth>
                 }
               />
