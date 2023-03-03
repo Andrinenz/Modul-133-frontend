@@ -2,7 +2,7 @@
 /* IMPORTS                                                                    */
 /*----------------------------------------------------------------------------*/
 
-import '../Dashboard.scss';
+import '../../Dashboard.scss';
 import { Table } from 'antd';
 import { useState } from 'react';
 import EditUserModal from './EditUserModal.jsx';
@@ -66,7 +66,7 @@ const User = (props) => {
   };
 
   return (
-    <div className='bcol-ibm-white pl-2 pt-3 pb-3 content pr-2'>
+    <div className='bcol-ibm-white pl-2 pt-3 pb-3 pr-2'>
       <EditUserModal
         modalOpen={modalOpen}
         handleModalClose={handleModalClose.bind(this)}
@@ -75,6 +75,7 @@ const User = (props) => {
       <div className='mt-2'>
         <Table
           columns={columns}
+          className='pointer'
           onRow={(record, rowIndex) => {
             return {
               onClick: () => handleModalOpen(parseInt(record.key)),

@@ -6,8 +6,8 @@ import { Button, Input, Modal, Radio } from 'antd';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import validator from 'validator';
-import { getDashboard } from '../../../state/dashboard/dashboardSelectors';
-import { fetchUpdateUser } from '../../../state/dashboard/dashboardThrunk';
+import { getDashboard } from '../../../../state/dashboard/dashboardSelectors';
+import { fetchUpdateUser } from '../../../../state/dashboard/dashboardThrunk';
 
 /*----------------------------------------------------------------------------*/
 /* EditUserModal                                                              */

@@ -3,7 +3,12 @@
 /*----------------------------------------------------------------------------*/
 
 import { axiosAuth } from '../../helpers/axios';
-import { setUsers, upateUserById } from './dashboardSlice';
+import {
+  setOrders,
+  setUsers,
+  upateUserById,
+  updateOrderById,
+} from './dashboardSlice';
 import {
   addErrorNotification,
   addSuccessNotification,
@@ -32,7 +37,6 @@ export const fetchUsers = () => {
 export const fetchUpdateUser = (obj) => {
   return async (dispatch) => {
     try {
-      console.log(obj);
       if (!obj.id) {
         return dispatch(
           addErrorNotification({
@@ -50,7 +54,60 @@ export const fetchUpdateUser = (obj) => {
         dispatch(
           addSuccessNotification({
             message: 'OK',
-            description: 'User Upated successfully',
+            description: 'User Updated successfully',
+          })
+        );
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+//Orders
+
+export const fetchOrders = () => {
+  return async (dispatch) => {
+    try {
+      let res = await axiosAuth.get('/api/order/allOrders');
+
+      if (res.data.result) {
+        dispatch(setOrders(res.data.result));
+        return;
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+export const fetchUpdateOrder = (obj) => {
+  return async (dispatch) => {
+    try {
+      if (!obj.id) {
+        return dispatch(
+          addErrorNotification({
+            message: 'Error',
+            description: 'No Id given to update user',
+          })
+        );
+      }
+
+      delete obj.title;
+      delete obj.description;
+      delete obj.price;
+      delete obj.image;
+      delete obj.stock;
+
+      const res = await axiosAuth.patch('/api/order/updateOrderById', obj);
+
+      if (res.status === 200) {
+        dispatch(updateOrderById(obj));
+        dispatch(fetchOrders());
+        dispatch(
+          addSuccessNotification({
+            message: 'OK',
+            description: 'Order Updated successfully',
           })
         );
       }
