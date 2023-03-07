@@ -1,0 +1,10 @@
+.Notification-wrapper {
+  z-index: 1;
+  position: absolute;
+  right: 1px;
+  transition-duration: 0.1s;
+}
+
+.Notification-wrapper * {
+  margin-bottom: 5px;
+}

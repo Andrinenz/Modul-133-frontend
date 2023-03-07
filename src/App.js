@@ -17,6 +17,8 @@ import { login } from './state/user/userThrunk';
 import Error404 from './pages/Error404/Error404';
 import MainHeader from './pages/MainHeader/MainHeader';
 import Checkout from './pages/Checkout/Checkout';
+import Notification from './pages/Notification/Notification';
+import Dashboard from './pages/Dashboard/Dashboard';
 
 /*----------------------------------------------------------------------------*/
 /* App                                                                        */
@@ -36,6 +38,7 @@ const App = () => {
         <>
           <div className='whole-page'>
             <MainHeader />
+            <Notification />
             <Routes>
               <Route index element={<Homepage />} />
               <Route path='login' element={<Login />} />
@@ -44,6 +47,14 @@ const App = () => {
                 element={
                   <RequireAuth>
                     <Products />
+                  </RequireAuth>
+                }
+              />
+              <Route
+                path='dashboard'
+                element={
+                  <RequireAuth>
+                    <Dashboard />
                   </RequireAuth>
                 }
               />

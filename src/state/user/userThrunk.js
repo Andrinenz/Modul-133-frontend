@@ -3,14 +3,16 @@
 /*----------------------------------------------------------------------------*/
 
 import { logoutUser, setAccessToken, setUser } from './userSlice';
+import { addErrorNotification } from '../notification/notificationSlice.js';
 import validator from 'validator';
 import jwtDecode from 'jwt-decode';
 import axios from 'axios';
+import { axiosAuth } from '../../helpers/axios';
 
 /*----------------------------------------------------------------------------*/
 /* userThrunk                                                                 */
 /*----------------------------------------------------------------------------*/
-const extractToken = async (email, password, start) => {
+const extractToken = async (email, password, start, navigate, dispatch) => {
   if (!start) {
     let res = await axios
       .post('http://localhost:8080/api/auth/login', {
@@ -19,7 +21,12 @@ const extractToken = async (email, password, start) => {
       })
       .catch((error) => {
         if (error.response.status === 401) {
-          console.log('Invalid email or password');
+          dispatch(
+            addErrorNotification({
+              message: 'Error',
+              description: 'Wrong Email or password entered',
+            })
+          );
         }
       });
 
@@ -55,9 +62,9 @@ const extractToken = async (email, password, start) => {
   }
 };
 
-export const login = (email, password, start) => {
+export const login = (email, password, start, navigate, dispatch) => {
   return async (dispatch) => {
-    let data = await extractToken(email, password, start);
+    let data = await extractToken(email, password, start, navigate, dispatch);
 
     if (data.token === null || !data.valid) {
       dispatch(logoutUser());
@@ -66,7 +73,39 @@ export const login = (email, password, start) => {
     if (data.valid) {
       dispatch(setAccessToken(data.token));
       dispatch(setUser(data.user));
+      dispatch(navigate('/products'));
     }
+  };
+};
+
+export const fetchCreateUser = (obj, navigate) => {
+  return async (dispatch) => {
+    try {
+      let res = await axiosAuth.post('/api/auth/createUser', obj);
+
+      if (res.status === 201) {
+        if (res.data.token) {
+          console.log(res);
+          let token = res.data.token;
+
+          if (token !== null && validator.isJWT(token)) {
+            localStorage.setItem('accessToken', token);
+            let decodedUser = jwtDecode(token);
+            dispatch(logoutUser());
+            dispatch(setUser(decodedUser));
+            dispatch(setAccessToken(res.data.token));
+            dispatch(navigate('/products'));
+          }
+        } else {
+          dispatch(
+            addErrorNotification({
+              message: 'Error',
+              description: 'Failed while creating user',
+            })
+          );
+        }
+      }
+    } catch (err) {}
   };
 };
 
