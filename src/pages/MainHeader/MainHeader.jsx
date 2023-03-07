@@ -11,6 +11,7 @@ import {
 } from "@carbon/icons-react";
 import { Badge, Layout, Menu, theme } from "antd";
 import React from "react";
+import { useNavigate } from "react-router";
 const { Header } = Layout;
 
 /*----------------------------------------------------------------------------*/
@@ -18,6 +19,8 @@ const { Header } = Layout;
 /*----------------------------------------------------------------------------*/
 
 const MainHeader = () => {
+  const navigate = useNavigate();
+
   const {
     token: { colorBgContainer },
   } = theme.useToken();
@@ -55,6 +58,7 @@ const MainHeader = () => {
                   <ShoppingCart size={"20"} />
                 </Badge>
               ),
+              onClick: navigate("/cart"),
               className: "NavCart",
             },
             {
