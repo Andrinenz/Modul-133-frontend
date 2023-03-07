@@ -16,6 +16,7 @@ import { getUser } from './state/user/userSelector';
 import { login } from './state/user/userThrunk';
 import Error404 from './pages/Error404/Error404';
 import MainHeader from './pages/MainHeader/MainHeader';
+import Checkout from './pages/Checkout/Checkout';
 
 /*----------------------------------------------------------------------------*/
 /* App                                                                        */
@@ -47,6 +48,7 @@ const App = () => {
                 }
               />
               <Route path='*' element={<Error404 />} />
+              <Route path='checkout' element={<Checkout />} />
             </Routes>
           </div>
         </>
