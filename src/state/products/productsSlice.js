@@ -34,8 +34,17 @@ export const productsSlice = createSlice({
       state.products = state.products.filter((e) => e.id === id);
     },
     updateProductById: (state, { payload }) => {
-      Object.keys(payload).forEach((key) => {
-        state.productById[key] = payload[key];
+      state.products = state.products.map((product) => {
+        if (product.id === payload.id) {
+          product.title = payload.title;
+          product.description = payload.description;
+          product.image = payload.image;
+          product.size = payload.size;
+          product.isArchived = payload.isArchived;
+          product.price = payload.price;
+          product.itemsInStock = payload.itemsInStock;
+        }
+        return product;
       });
     },
   },

@@ -93,11 +93,7 @@ export const fetchUpdateOrder = (obj) => {
         );
       }
 
-      delete obj.title;
-      delete obj.description;
-      delete obj.price;
-      delete obj.image;
-      delete obj.stock;
+      delete obj.Cards;
 
       const res = await axiosAuth.patch('/api/order/updateOrderById', obj);
 

@@ -3,6 +3,7 @@
 /*----------------------------------------------------------------------------*/
 
 import { axiosAuth } from '../../helpers/axios.js';
+import { addSuccessNotification } from '../notification/notificationSlice.js';
 import {
   setProducts,
   setProductById,
@@ -51,7 +52,14 @@ export const fetchUpdateProduct = (productObj) => {
         console.log('No id given');
       }
 
-      const fields = ['title', 'image', 'price', 'description', 'itemsInStock'];
+      const fields = [
+        'title',
+        'image',
+        'price',
+        'description',
+        'itemsInStock',
+        'isArchived',
+      ];
 
       let valid = true;
       Object.keys(productObj).forEach((key) => {
@@ -67,6 +75,12 @@ export const fetchUpdateProduct = (productObj) => {
 
       if (res.status === 200) {
         dispatch(updateProductById(productObj));
+        dispatch(
+          addSuccessNotification({
+            message: 'OK',
+            description: 'Product updated successfully',
+          })
+        );
       }
     } catch (err) {
       console.log(err);
@@ -81,6 +95,12 @@ export const fetchCreateProduct = (productObj) => {
 
       if (res.status === 201) {
         dispatch(addProduct(res.data.result));
+        dispatch(
+          addSuccessNotification({
+            message: 'OK',
+            description: 'New Product created successfully',
+          })
+        );
       }
     } catch (err) {
       console.log(err);

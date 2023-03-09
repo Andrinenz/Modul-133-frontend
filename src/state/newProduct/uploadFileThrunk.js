@@ -3,7 +3,10 @@
 /*----------------------------------------------------------------------------*/
 
 import { setData } from './newProductSlice';
-import { addErrorNotification } from '../notification/notificationSlice';
+import {
+  addErrorNotification,
+  addSuccessNotification,
+} from '../notification/notificationSlice';
 
 /*----------------------------------------------------------------------------*/
 /* uploadFileThrunk                                                           */
@@ -37,6 +40,13 @@ export const handleFileUpload = (event) => {
           let imagePath = result.result.hostedPath;
 
           dispatch(setData({ target: 'image', value: imagePath }));
+          dispatch(setData({ target: 'status', value: 'edit' }));
+          dispatch(
+            addSuccessNotification({
+              message: 'OK',
+              description: 'File uploaded successfully',
+            })
+          );
         }
       })
       .catch((error) => console.log('file could not be uploaded'));
@@ -50,6 +60,12 @@ export const handleFileUpload = (event) => {
         })
       );
     }
+  };
+};
+
+export const handleFileUploadDelete = () => {
+  return async (dispatch) => {
+    dispatch(setData({ target: 'image', value: '' }));
   };
 };
 

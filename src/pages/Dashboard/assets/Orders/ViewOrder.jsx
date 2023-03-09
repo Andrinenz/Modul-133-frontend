@@ -2,7 +2,7 @@
 /* IMPORTS                                                                    */
 /*----------------------------------------------------------------------------*/
 
-import { Button, Input, Modal } from 'antd';
+import { Button, Input, Modal, Select } from 'antd';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getDashboard } from '../../../../state/dashboard/dashboardSelectors';
@@ -23,15 +23,13 @@ const ViewOrder = (props) => {
   const [data, setData] = useState({
     firstname: selectedOrder?.firstname,
     lastname: selectedOrder?.lastname,
+    Cards: selectedOrder?.Cards,
     email: selectedOrder?.User?.email,
-    title: selectedOrder?.Item?.title,
-    description: selectedOrder?.Item?.description,
-    price: selectedOrder?.Item?.price,
-    stock: selectedOrder?.Item?.itemsInStock,
-    image: selectedOrder?.Item?.image,
     address: selectedOrder?.address,
     apartementNumber: selectedOrder?.apartementNumber,
     state: selectedOrder?.state,
+    paymentMethod: selectedOrder?.paymentMethod,
+    cvv: selectedOrder?.cvv,
     plz: selectedOrder?.plz,
     country: selectedOrder?.country,
     cardHolder: selectedOrder?.cardHolder,
@@ -43,15 +41,13 @@ const ViewOrder = (props) => {
     setData({
       email: selectedOrder?.User?.email,
       firstname: selectedOrder?.firstname,
+      Cards: selectedOrder?.Cards,
       lastname: selectedOrder?.lastname,
-      title: selectedOrder?.Item?.title,
-      description: selectedOrder?.Item?.description,
-      price: selectedOrder?.Item?.price,
-      stock: selectedOrder?.Item?.itemsInStock,
-      image: selectedOrder?.Item?.image,
       address: selectedOrder?.address,
       apartementNumber: selectedOrder?.apartementNumber,
       state: selectedOrder?.state,
+      paymentMethod: selectedOrder?.paymentMethod,
+      cvv: selectedOrder?.cvv ? selectedOrder?.cvv : ' ',
       plz: selectedOrder?.plz,
       country: selectedOrder?.country,
       cardHolder: selectedOrder?.cardHolder,
@@ -69,6 +65,9 @@ const ViewOrder = (props) => {
     switch (inputType) {
       case 'textinput':
         dataTemp[type] = event.target.value;
+        break;
+      case 'dropdown':
+        dataTemp[type] = event;
         break;
       default:
         break;
@@ -90,6 +89,7 @@ const ViewOrder = (props) => {
       data.state === '' ||
       data.plz === '' ||
       data.country === '' ||
+      data.cvv === '' ||
       data.cardHolder === '' ||
       data.cardNumber === '' ||
       data.totalAmount === ''
@@ -126,28 +126,44 @@ const ViewOrder = (props) => {
                 <h5 className='text-bold ml-1'>{data.email}</h5>
               </div>
             </div>
-            <h3 className='mb-1 deco-underline'>Item details:</h3>
-            <div className='d-flex fd-c'>
-              <div className='d-flex'>
-                <h5 className='text-no-bold'>Title:</h5>
-                <h5 className='text-bold ml-1'>{data.title}</h5>
-              </div>
-              <div className='d-flex'>
-                <h5 className='text-no-bold'>Descr:</h5>
-                <h5 className='text-bold ml-1'>{data.description}</h5>
-              </div>
-              <div className='d-flex'>
-                <h5 className='text-no-bold'>Price:</h5>
-                <h5 className='text-bold ml-1'>{data.price}</h5>
-              </div>
-              <div className='d-flex'>
-                <h5 className='text-no-bold'>Stock:</h5>
-                <h5 className='text-bold ml-1'>{data.stock}</h5>
-              </div>
-              <div className='d-flex'>
-                <h5 className='text-no-bold'>Image Link:</h5>
-                <h5 className='text-bold ml-1'>{data.image}</h5>
-              </div>
+            <div className='d-flex bx-wrap'>
+              {data?.Cards?.map((card, index) => {
+                return (
+                  <div className='d-flex mr-6 fd-c' key={index + 1}>
+                    <h3 className='mb-1 deco-underline'>{`Item ${
+                      index + 1
+                    }`}</h3>
+                    <div className='d-flex'>
+                      <h5 className='text-no-bold'>Title:</h5>
+                      <h5 className='text-bold ml-1'>{card.Item.title}</h5>
+                    </div>
+                    <div className='d-flex'>
+                      <h5 className='text-no-bold'>Descr:</h5>
+                      <h5 className='text-bold ml-1'>
+                        {card.Item.description}
+                      </h5>
+                    </div>
+                    <div className='d-flex'>
+                      <h5 className='text-no-bold'>Price:</h5>
+                      <h5 className='text-bold ml-1'>{card.Item.price}</h5>
+                    </div>
+                    <div className='d-flex'>
+                      <h5 className='text-no-bold'>Stock:</h5>
+                      <h5 className='text-bold ml-1'>
+                        {card.Item.itemsInStock}
+                      </h5>
+                    </div>
+                    <div className='d-flex'>
+                      <h5 className='text-no-bold'>Item count:</h5>
+                      <h5 className='text-bold ml-1'>{card.itemCount}</h5>
+                    </div>
+                    <div className='d-flex'>
+                      <h5 className='text-no-bold'>Image Link:</h5>
+                      <h5 className='text-bold ml-1'>{card.Item.image}</h5>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
             <h3 className='mb-1 deco-underline'>Order details:</h3>
             <div className='d-flex bx-wrap f-jb'>
@@ -232,25 +248,53 @@ const ViewOrder = (props) => {
               </div>
             </div>
             <h3 className='mb-1 deco-underline mt-1'>Payment details:</h3>
+            <div className='d-flex fd-c bx-wrap'>
+              <div>
+                <h5>Payment Method:</h5>
+                <Select
+                  value={data.paymentMethod}
+                  className='w100p'
+                  options={[
+                    { value: 'PayPal', label: 'PayPal' },
+                    { value: 'CreditCard', label: 'Credit card' },
+                  ]}
+                  onChange={(e) => handleKeyUp(e, 'paymentMethod', 'dropdown')}
+                  size='large'
+                />
+              </div>
+            </div>
             <div className='d-flex bx-wrap f-jb'>
-              <div className='d-flex pl-0 pr-0'>
+              <div className='d-flex mt-2 pl-0 pr-0'>
                 <div>
                   <h5>Card holder:</h5>
                   <Input
                     placeholder='card holder'
                     onChange={(e) => handleKeyUp(e, 'cardHolder', 'textinput')}
                     value={data.cardHolder}
+                    disabled={data.paymentMethod === 'PayPal' ? true : false}
                     size={'large'}
                   />
                 </div>
               </div>
-              <div className='d-flex pl-0 pr-0'>
+              <div className='d-flex mt-2 pl-0 pr-0'>
                 <div>
                   <h5>Price amount:</h5>
                   <Input
                     placeholder='price amount'
                     value={data.totalAmount}
                     onChange={(e) => handleKeyUp(e, 'totalAmount', 'textinput')}
+                    size={'large'}
+                  />
+                </div>
+              </div>
+              <div className='d-flex pl-0 mt-2 pr-0'>
+                <div>
+                  <h5>CVV:</h5>
+                  <Input
+                    placeholder='cvv'
+                    disabled={data.paymentMethod === 'PayPal' ? true : false}
+                    value={data.cvv}
+                    onChange={(e) => handleKeyUp(e, 'cvv', 'textinput')}
                     size={'large'}
                   />
                 </div>
@@ -263,6 +307,7 @@ const ViewOrder = (props) => {
                   placeholder='card number'
                   onChange={(e) => handleKeyUp(e, 'cardNumber', 'textinput')}
                   value={data.cardNumber}
+                  disabled={data.paymentMethod === 'PayPal' ? true : false}
                   size={'large'}
                 />
               </div>
