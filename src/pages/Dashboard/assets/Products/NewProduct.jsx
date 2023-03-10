@@ -49,7 +49,7 @@ const NewProduct = (props) => {
     setData(dataTemp);
   };
   const handleOnClose = () => {
-    props.handleModalClose();
+    props.handleModalClose('new');
   };
 
   const handleSubmit = () => {

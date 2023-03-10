@@ -3,10 +3,7 @@
 /*----------------------------------------------------------------------------*/
 
 import { setData } from './newProductSlice';
-import {
-  addErrorNotification,
-  addSuccessNotification,
-} from '../notification/notificationSlice';
+import { addErrorNotification } from '../notification/notificationSlice';
 
 /*----------------------------------------------------------------------------*/
 /* uploadFileThrunk                                                           */
@@ -41,12 +38,6 @@ export const handleFileUpload = (event) => {
 
           dispatch(setData({ target: 'image', value: imagePath }));
           dispatch(setData({ target: 'status', value: 'edit' }));
-          dispatch(
-            addSuccessNotification({
-              message: 'OK',
-              description: 'File uploaded successfully',
-            })
-          );
         }
       })
       .catch((error) => console.log('file could not be uploaded'));

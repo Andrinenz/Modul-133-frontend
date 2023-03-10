@@ -46,6 +46,7 @@ export const productsSlice = createSlice({
         }
         return product;
       });
+      state.loadedUpdate = false;
     },
   },
 });

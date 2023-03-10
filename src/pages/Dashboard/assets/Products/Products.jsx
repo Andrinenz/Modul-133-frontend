@@ -11,6 +11,7 @@ import {
   fetchProductsData,
   fetchUpdateProduct,
 } from '../../../../state/products/productsThrunk';
+import EditProduct from './EditProduct';
 import NewProduct from './NewProduct';
 
 /*----------------------------------------------------------------------------*/
@@ -19,7 +20,8 @@ import NewProduct from './NewProduct';
 
 const Products = () => {
   const dispatch = useDispatch();
-  const [modalOpen, setModalOpen] = useState(false);
+  const [modalOpenNew, setModalOpenNew] = useState(false);
+  const [modalOpenEdit, setModalOpenEdit] = useState(false);
 
   const { products, loaded } = useSelector(getProduct);
 
@@ -87,6 +89,13 @@ const Products = () => {
               />
             </Tooltip>
           )}
+          <Button
+            type='primary'
+            className='ml-1'
+            onClick={() => handleModalOpen('edit', parseInt(record.key))}
+          >
+            Edit
+          </Button>
         </div>
       ),
     },
@@ -106,24 +115,38 @@ const Products = () => {
     return data;
   };
 
-  const handleModalOpen = () => {
-    setModalOpen(true);
+  const handleModalOpen = (type, id) => {
+    if (type === 'new') {
+      setModalOpenNew(true);
+    } else
+      setModalOpenEdit({
+        open: true,
+        productId: id,
+      });
   };
 
-  const handleModalClose = () => {
-    setModalOpen(false);
+  const handleModalClose = (type) => {
+    if (type === 'new') {
+      setModalOpenNew(false);
+      return;
+    } else setModalOpenEdit(false);
     return;
   };
 
   return (
     <div className='bcol-ibm-white pl-2 pt-3 pb-3 pr-2'>
       <NewProduct
-        modalOpen={modalOpen}
+        modalOpen={modalOpenNew}
+        handleModalClose={handleModalClose.bind(this)}
+      />
+
+      <EditProduct
+        modalOpen={modalOpenEdit}
         handleModalClose={handleModalClose.bind(this)}
       />
       <div className='d-flex f-jb f-ac'>
         <h1>Products</h1>
-        <Button onClick={() => handleModalOpen()} type='primary'>
+        <Button onClick={() => handleModalOpen('new')} type='primary'>
           Add new Product
         </Button>
       </div>
