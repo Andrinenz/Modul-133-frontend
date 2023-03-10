@@ -62,9 +62,9 @@ const extractToken = async (email, password, start, navigate, dispatch) => {
   }
 };
 
-export const login = (email, password, start, navigate, dispatch) => {
+export const login = (email, password, start, navigate, dispatch2) => {
   return async (dispatch) => {
-    let data = await extractToken(email, password, start, navigate, dispatch);
+    let data = await extractToken(email, password, start, navigate, dispatch2);
 
     if (data.token === null || !data.valid) {
       dispatch(logoutUser());
@@ -85,7 +85,6 @@ export const fetchCreateUser = (obj, navigate) => {
 
       if (res.status === 201) {
         if (res.data.token) {
-          console.log(res);
           let token = res.data.token;
 
           if (token !== null && validator.isJWT(token)) {

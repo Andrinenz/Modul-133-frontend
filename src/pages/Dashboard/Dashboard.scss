@@ -2,6 +2,10 @@
   margin-bottom: 0 !important;
 }
 
+.pointer * .ant-table-tbody {
+  cursor: pointer !important;
+}
+
 .ant-table-thead .ant-table-cell {
   background: #e0e0e0 !important;
 }

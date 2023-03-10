@@ -37,6 +37,7 @@ export const handleFileUpload = (event) => {
           let imagePath = result.result.hostedPath;
 
           dispatch(setData({ target: 'image', value: imagePath }));
+          dispatch(setData({ target: 'status', value: 'edit' }));
         }
       })
       .catch((error) => console.log('file could not be uploaded'));
@@ -50,6 +51,12 @@ export const handleFileUpload = (event) => {
         })
       );
     }
+  };
+};
+
+export const handleFileUploadDelete = () => {
+  return async (dispatch) => {
+    dispatch(setData({ target: 'image', value: '' }));
   };
 };
 

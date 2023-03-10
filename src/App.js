@@ -50,7 +50,7 @@ const App = () => {
               <Route
                 path='dashboard'
                 element={
-                  <RequireAuth>
+                  <RequireAuth roles={['Admin']}>
                     <Dashboard />
                   </RequireAuth>
                 }
