@@ -59,7 +59,7 @@ const Products = () => {
       key: 'itemsInStock',
     },
     {
-      title: 'Archvied',
+      title: 'Archived',
       dataIndex: 'isArchived',
       key: 'isArchived',
     },
