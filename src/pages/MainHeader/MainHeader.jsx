@@ -58,7 +58,6 @@ const MainHeader = () => {
                   <ShoppingCart size={"20"} />
                 </Badge>
               ),
-              onClick: navigate("/cart"),
               className: "NavCart",
             },
             {

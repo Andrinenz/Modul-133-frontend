@@ -20,6 +20,7 @@ import Checkout from "./pages/Checkout/Checkout";
 import Notification from "./pages/Notification/Notification";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import Cart from "./pages/Cart/Cart";
+import ItemOverview from "./pages/ItemOverview/ItemOverview";
 
 /*----------------------------------------------------------------------------*/
 /* App                                                                        */
@@ -52,6 +53,14 @@ const App = () => {
                 }
               />
               <Route
+                path="item/:id"
+                element={
+                  <RequireAuth>
+                    <ItemOverview />
+                  </RequireAuth>
+                }
+              />
+              <Route
                 path="dashboard"
                 element={
                   <RequireAuth>
@@ -68,14 +77,14 @@ const App = () => {
                   </RequireAuth>
                 }
               />
-              <Route
+              {/*               <Route
                 path="cart"
                 element={
                   <RequireAuth>
                     <Cart />
                   </RequireAuth>
                 }
-              />
+              /> */}
             </Routes>
           </div>
         </>

@@ -1,6 +1,7 @@
 /*----------------------------------------------------------------------------*/
 /* IMPORTS                                                                    */
 /*----------------------------------------------------------------------------*/
+import { useNavigate } from "react-router";
 import "./Cards.scss";
 /*----------------------------------------------------------------------------*/
 /* Card                                                                       */
@@ -8,10 +9,12 @@ import "./Cards.scss";
 
 const Card = (props) => {
   let data = props.data;
+  const navigate = useNavigate();
+
   return (
     <div className="Cards">
       <div>
-        <h1 className="">Card {data}</h1>
+        <h1 className="">Card test</h1>
       </div>
     </div>
   );

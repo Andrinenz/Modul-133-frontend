@@ -1,0 +1,36 @@
+.maincontent {
+  margin: 5rem;
+  min-height: 40rem;
+  border-radius: 10px;
+  background-color: white;
+  margin-bottom: 2%;
+}
+
+.picture {
+  min-height: 20rem;
+  margin-top: 2%;
+  margin-left: 2%;
+  margin-right: 2%;
+  border-radius: 10px;
+  background-color: lightgray;
+}
+
+.title {
+  margin-top: 4%;
+  margin-left: 2%;
+  margin-right: 2%;
+  border-radius: 10px;
+  min-height: 2rem;
+  background-color: darkgray;
+}
+
+.description {
+  background-color: gray;
+  min-height: 10rem;
+  margin-top: 2%;
+}
+
+.close {
+  float: right;
+  min-height: fit-content;
+}
