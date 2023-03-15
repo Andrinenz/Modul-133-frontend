@@ -18,6 +18,7 @@ import Error404 from './pages/Error404/Error404';
 import Logout from './pages/Logout/Logout';
 import Notification from './pages/Notification/Notification';
 import Dashboard from './pages/Dashboard/Dashboard';
+import Checkout from './pages/Checkout/Checkout';
 
 /*----------------------------------------------------------------------------*/
 /* App                                                                        */
@@ -53,6 +54,14 @@ const App = () => {
                 element={
                   <RequireAuth roles={['Admin']}>
                     <Dashboard />
+                  </RequireAuth>
+                }
+              />
+              <Route
+                path='checkout'
+                element={
+                  <RequireAuth>
+                    <Checkout />
                   </RequireAuth>
                 }
               />

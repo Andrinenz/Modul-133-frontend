@@ -1,0 +1,19 @@
+.fixed-sidenav {
+  position: fixed;
+  right: 0;
+  top: 0;
+  overflow: auto;
+  overflow-x: hidden;
+  height: 100%;
+  border-left: 2px solid #a8a8a8;
+}
+
+@media only screen and (max-width: 1024px) and (max-height: 808px) {
+  .fixed-sidenav {
+    position: relative;
+    width: 100%;
+    left: auto;
+    top: auto;
+    bottom: 0;
+  }
+}
