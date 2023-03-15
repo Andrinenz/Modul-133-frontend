@@ -15,11 +15,10 @@ const Checkout = () => {
     <>
       <div className='bx-wrap'>
         <div className='d-flex res-top fd-c cds--col-lg-11 pl-0 pr-0'>
-          <div className='bcol-ibm-gray-20 mr-3 pt-2 pl-2 pr-2 ml-3 mt-2'>
-            <h1 className='mb-0'>Checkout</h1>
-            <div className='border-bottom mt-1' />
+          <h1 className='ml-3 mt-2 mb-0'>Checkout</h1>
+          <div className='bcol-ibm-gray-20 mr-3 pt-1 pl-2 pr-2 ml-3 mt-2'>
             <div>
-              <h3 className='mb-0 mt-2'>Personal details:</h3>
+              <h3 className='deco-underline mb-0'>Personal details:</h3>
               <div className='d-flex f-jb mt-2'>
                 <div className='cds--col-lg-7 mr-1 pl-0 pr-0'>
                   <h5>Firstname:</h5>
@@ -38,8 +37,8 @@ const Checkout = () => {
           </div>
           <div className='cds--col-lg-11 pl-0 pr-0 total-box pt-2'>
             <div className='d-flex f-ac f-jb'>
-              <h2 className='text-bold pl-3'>Total</h2>
-              <h2 className=''>300.-</h2>
+              <h2 className='pl-3'>Total</h2>
+              <h2 className='text-bold pr-3'>300.-</h2>
             </div>
           </div>
         </div>
