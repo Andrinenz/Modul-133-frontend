@@ -12,6 +12,14 @@
   border-bottom: 2px solid #8d8d8d;
 }
 
+.link-hover:hover {
+  text-decoration: underline #0062fe;
+}
+
+.payment-size {
+  width: 300px;
+}
+
 .title-box {
   position: sticky;
   top: 0;
@@ -19,10 +27,15 @@
   z-index: 999;
 }
 
+.radio-group * .ant-radio-inner {
+  width: 2rem !important;
+  height: 2rem !important;
+}
+
 .total-box {
   position: fixed;
+  width: 100%;
   bottom: 0;
-  left: 0;
   border-top: 2px solid #8d8d8d;
   background-color: #fff;
   z-index: 999;
@@ -42,6 +55,12 @@
   width: 100%;
 }
 
+@media only screen and (max-width: 400px) {
+  .payment-size {
+    width: 140px;
+  }
+}
+
 @media only screen and (max-width: 1055px) {
   .fixed-sidenav {
     position: fixed;
@@ -50,14 +69,19 @@
     width: 100%;
   }
 
+  .margin-res-top {
+    margin-top: 0.5rem;
+  }
+
   .res-top {
-    margin-top: 24rem;
     top: 0;
     position: fixed;
-    height: 100%;
+    height: calc(100% - 24rem);
     overflow-x: hidden;
-    overflow: auto;
+    margin-top: 24rem;
+    border-top: 2px solid #8d8d8d;
   }
+
   .margin-res {
     padding-bottom: 5rem;
   }

@@ -34,17 +34,15 @@ const ProductItem = (props) => {
           <h4 className='ml-1'>3</h4>
         </div>
       </div>
-      <div className='d-flex f-ac f-jb mb-1 mt-2'>
-        <Link size='lg'>
-          <a
-            href='products'
-            rel='noreferrer'
-            target={'_blank'}
-            className='deco-none'
-          >
-            To Item
-          </a>
-        </Link>
+      <div className='d-flex link-hover f-ac f-jb mb-1 mt-2'>
+        <a
+          href='products'
+          className='deco-none'
+          rel='noreferrer'
+          target={'_blank'}
+        >
+          To Item
+        </a>
         <ArrowRight className='col-ibm-blue-60 ml-2' size={'20'} />
       </div>
       <div className='border-bottom' />

@@ -7,6 +7,7 @@ import userReducer from './user/userSlice.js';
 import reviewReducer from './review/reviewSlice.js';
 import productReducer from './products/productsSlice.js';
 import orderReducer from './order/orderSlice.js';
+import newOrderReducer from './newOrder/newOrderSlice.js';
 import notificationReducer from './notification/notificationSlice.js';
 import newProductReducer from './newProduct/newProductSlice.js';
 import dashboardReducer from './dashboard/dashboardSlice.js';
@@ -21,6 +22,7 @@ export const store = configureStore({
     product: productReducer,
     review: reviewReducer,
     order: orderReducer,
+    newOrder: newOrderReducer,
     newProduct: newProductReducer,
     dashboard: dashboardReducer,
     notification: notificationReducer,
