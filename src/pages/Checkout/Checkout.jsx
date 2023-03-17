@@ -2,20 +2,40 @@
 /* IMPORTS                                                                    */
 /*----------------------------------------------------------------------------*/
 
-import { Input, InputNumber, Select, Steps, Button } from 'antd';
+import { Steps, Button } from 'antd';
 import ProductItem from './assets/ProductItem';
-import { Country, State, City } from 'country-state-city';
 import './Checkout.scss';
 import { useState } from 'react';
 import PersonalInformation from './assets/PersonalInformations';
 import ShippingInformations from './assets/ShippingInformations';
 import Payment from './assets/Payment';
+import { useSelector } from 'react-redux';
+import { getNewOrder } from '../../state/newOrder/newOrderSelector';
 
 /*----------------------------------------------------------------------------*/
 /* Checkout                                                                   */
 /*----------------------------------------------------------------------------*/
 
 const Checkout = () => {
+  const newOrder = useSelector(getNewOrder);
+
+  let personalInputFields = ['email', 'firstname', 'lastname'];
+  let shippingInputFields = [
+    'address',
+    'apartementNumber',
+    'plz',
+    'country',
+    'state',
+    'city',
+  ];
+  let paymentInputFields = [
+    'paymentMethod',
+    'cardHolder',
+    'cardNumber',
+    'cvv',
+    'cardExpiryDate',
+  ];
+
   const steps = [
     { title: 'Personal Informations', content: <PersonalInformation /> },
     { title: 'Shipping details', content: <ShippingInformations /> },
@@ -36,20 +56,35 @@ const Checkout = () => {
     title: item.title,
   }));
 
-  const generateCountryOptions = (options) => {
-    let data = [];
-    options.forEach((country) => {
-      data.push({
-        label: country.label,
-        value: country.label,
+  const disabledBtn = (type) => {
+    let disableStatus = false;
+
+    if (type === 'personal') {
+      personalInputFields.forEach((input) => {
+        if (newOrder[input].invalid !== false) {
+          disableStatus = true;
+        }
       });
-    });
-    return data;
+    }
+
+    if (type === 'shipping') {
+      shippingInputFields.forEach((input) => {
+        if (newOrder[input].invalid !== false) {
+          disableStatus = true;
+        }
+      });
+    }
+
+    if (type === 'payment') {
+      paymentInputFields.forEach((input) => {
+        if (newOrder[input].invalid !== false) {
+          disableStatus = true;
+        }
+      });
+    }
+
+    return disableStatus;
   };
-
-  const countries = Country.getAllCountries();
-
-  console.log(countries);
 
   return (
     <>
@@ -60,11 +95,23 @@ const Checkout = () => {
             <Steps current={current} items={items} />
             <div>{steps[current].content}</div>
             <div className='mt-3 mb-2'>
-              {current < steps.length - 1 && (
-                <Button type='primary' onClick={() => nextStep()}>
+              {current === 0 ? (
+                <Button
+                  type='primary'
+                  disabled={disabledBtn('personal')}
+                  onClick={() => nextStep()}
+                >
                   Next
                 </Button>
-              )}
+              ) : current === 1 ? (
+                <Button
+                  type='primary'
+                  disabled={disabledBtn('shipping')}
+                  onClick={() => nextStep()}
+                >
+                  Next
+                </Button>
+              ) : null}
               {current === steps.length - 1 && (
                 <Button type='primary'>Submit</Button>
               )}
