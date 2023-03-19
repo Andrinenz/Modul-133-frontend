@@ -14,6 +14,8 @@ export const ordersSlice = createSlice({
     loaded: false,
     orders: [],
     orderById: null,
+    ordersByUser: null,
+    loadedUserOrders: false,
     loadedById: false,
     error: null,
   },
@@ -25,6 +27,10 @@ export const ordersSlice = createSlice({
     setOrderById: (state, { payload }) => {
       state.orderById = payload;
       state.loadedById = true;
+    },
+    setOrdersByUser: (state, { payload }) => {
+      state.ordersByUser = payload;
+      state.loadedUserOrders = true;
     },
     addOrder: (state, { payload }) => {
       state.orders.push(payload);
@@ -49,6 +55,7 @@ export const {
   addOrder,
   updateOrderById,
   setOrderById,
+  setOrdersByUser,
   setOrders,
 } = ordersSlice.actions;
 

@@ -10,6 +10,7 @@ import {
   deleteOrder,
   setOrderById,
   setOrders,
+  setOrdersByUser,
   updateOrderById,
 } from './orderSlice';
 
@@ -24,6 +25,21 @@ export const fetchOrdersData = () => {
 
       if (res.data.result) {
         dispatch(setOrders(res.data.result));
+        return;
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+export const fetchUserOrders = () => {
+  return async (dispatch) => {
+    try {
+      let res = await axiosAuth.get('/api/order/ordersFromUser');
+
+      if (res.data.result) {
+        dispatch(setOrdersByUser(res.data.result));
         return;
       }
     } catch (err) {
@@ -49,6 +65,7 @@ export const fetchOrderById = (id) => {
 export const fetchCreateOrder = (orderObj, navigate) => {
   return async (dispatch) => {
     try {
+      console.log(orderObj);
       let res = await axiosAuth.post('/api/order/createOrder', orderObj);
 
       if (res.status === 201) {

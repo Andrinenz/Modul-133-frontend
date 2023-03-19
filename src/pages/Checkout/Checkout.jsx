@@ -129,7 +129,7 @@ const Checkout = () => {
       email: newOrder.email.value,
       country: newOrder.country.value,
       state: newOrder.state.value,
-      city: newOrder.city.value,
+      city: newOrder.city.value === '' ? 'null' : newOrder.city.value,
       address: newOrder.address.value,
       apartementNumber: newOrder.apartementNumber.value,
       plz: newOrder.plz.value,
@@ -147,11 +147,12 @@ const Checkout = () => {
 
     if (newOrder.paymentMethod.value === 'PayPal') {
       delete obj.cardHolder;
-      delete obj.cardProvider;
+      delete obj.cardCompany;
       delete obj.cardNumber;
       delete obj.cvc;
       delete obj.cardExpiryDate;
       dispatch(fetchCreateOrder(obj, navigate));
+      return;
     }
 
     dispatch(fetchCreateOrder(obj, navigate));
@@ -197,6 +198,7 @@ const Checkout = () => {
                             href={'https://paypal.com'}
                             target={'_blank'}
                             rel='noreferrer'
+                            className='col-ibm-white'
                           >
                             Submit
                           </a>

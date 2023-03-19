@@ -27,7 +27,10 @@ const CheckoutDone = () => {
     dispatch(fetchOrderById(id));
   }, [dispatch, id]);
 
-  console.log(orderById);
+  const formatDate = (date) => {
+    let newDate = new Date(date);
+    return `${newDate.getDate()}.${newDate.getMonth()}.${newDate.getFullYear()}`;
+  };
 
   return (
     <>
@@ -39,7 +42,10 @@ const CheckoutDone = () => {
               <h4 className='col-ibm-gray-70'>ORDER #{orderById?.id}</h4>
             </div>
             <div className='mt-3'>
-              <h3>Thanks for your purchase!</h3>
+              <h3>
+                Thanks for your purchase from the{' '}
+                {formatDate(orderById.createdAt)}!
+              </h3>
             </div>
             <div className='mt-1'>
               <h4 className='col-ibm-gray-70'>
@@ -89,7 +95,7 @@ const CheckoutDone = () => {
               <div className='border-bottom' />
               <div className='mt-2 d-flex f-jb'>
                 <h3>Total</h3>
-                <h2>{orderById.totalAmount}.-</h2>
+                <h2 className='text-bold'>{orderById.totalAmount}.-</h2>
               </div>
             </div>
           </div>
