@@ -125,12 +125,19 @@ const ShippingInformations = () => {
             placeholder='Search for a country'
             options={generateCountryOptions(countries)}
             status={newOrder.country.invalid ? 'error' : ''}
-            value={newOrder.country.value}
+            value={
+              newOrder.country.value === '' ? null : newOrder.country.value
+            }
             onChange={(e) => {
               dispatch(handleKeyUp(e, 'country', 'dropdown'));
               dispatch(checkIfValidInput(e, 'country', 'dropdown'));
             }}
           />
+          {newOrder.country.invalid ? (
+            <div className='pt-1' style={{ color: '#ff4d4f' }}>
+              <h6>{newOrder.country.invalidText}</h6>
+            </div>
+          ) : null}
         </div>
         <div className='cds--col-lg-7 mt-1 pl-0 pr-0'>
           <h5>State:</h5>
@@ -151,12 +158,17 @@ const ShippingInformations = () => {
             options={getStatesOfCountry(
               getCountryCode(newOrder.country.value, 'state')
             )}
-            value={newOrder.state.value}
+            value={newOrder.state.value === '' ? null : newOrder.state.value}
             onChange={(e) => {
               dispatch(handleKeyUp(e, 'state', 'dropdown'));
               dispatch(checkIfValidInput(e, 'state', 'dropdown'));
             }}
           />
+          {newOrder.state.invalid ? (
+            <div className='pt-1' style={{ color: '#ff4d4f' }}>
+              <h6>{newOrder.state.invalidText}</h6>
+            </div>
+          ) : null}
         </div>
         <div className='cds--col-lg-7 mt-1 pl-0 pr-0'>
           <h5>City:</h5>
@@ -173,7 +185,7 @@ const ShippingInformations = () => {
                 .toLowerCase()
                 .localeCompare((optionB?.label ?? '').toLowerCase())
             }
-            value={newOrder.city.value}
+            value={newOrder.city.value === '' ? null : newOrder.city.value}
             disabled={dropdownSelection().cityEnabled}
             options={getCitiesOfState(
               getCountryCode(newOrder.country.value, 'state')
@@ -183,6 +195,11 @@ const ShippingInformations = () => {
               dispatch(checkIfValidInput(e, 'city', 'dropdown'));
             }}
           />
+          {newOrder.city.invalid ? (
+            <div className='pt-1' style={{ color: '#ff4d4f' }}>
+              <h6>{newOrder.city.invalidText}</h6>
+            </div>
+          ) : null}
         </div>
         <div className='d-flex bx-wrap mt-2'>
           <div className='cds--col-lg-8 mr-1 pl-0 pr-0'>

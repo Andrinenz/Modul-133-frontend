@@ -67,4 +67,17 @@ export const newOrderConfig = {
     'ZA',
     'ZM',
   ],
+  paymentOptions: [
+    { label: 'PayPal', value: 'PayPal' },
+    { label: 'Credit Card', value: 'Credit Card' },
+  ],
+  cardProvider: [
+    { label: 'Amex', value: 'amex' },
+    { label: 'Dinersclub', value: 'dinersclub' },
+    { label: 'Discover', value: 'discover' },
+    { label: 'Jcb', value: 'jcb' },
+    { label: 'Mastercard', value: 'mastercard' },
+    { label: 'Unionpay', value: 'unionpay' },
+    { label: 'Visa', value: 'visa' },
+  ],
 };

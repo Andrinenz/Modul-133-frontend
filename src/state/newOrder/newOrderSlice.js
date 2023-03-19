@@ -20,8 +20,9 @@ const initialState = {
   city: { value: '', invalid: null, invalidText: '' },
   paymentMethod: { value: '', invalid: null, invalidText: '' },
   cardHolder: { value: '', invalid: null, invalidText: '' },
+  cardProvider: { value: '', invalid: null, invalidText: '' },
   cardNumber: { value: '', invalid: null, invalidText: '' },
-  cvv: { value: '', invalid: null, invalidText: '' },
+  cvc: { value: '', invalid: null, invalidText: '' },
   cardExpiryDate: { value: '', invalid: null, invalidText: '' },
 };
 

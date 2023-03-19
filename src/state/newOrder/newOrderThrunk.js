@@ -13,6 +13,10 @@ export const handleKeyUp = (event, type, inputType) => {
   return (dispatch) => {
     switch (inputType) {
       case 'textinput':
+        if (type === 'cardExpiryDate') {
+          dispatch(setOrderInfo({ target: 'cardExpiryDate', value: event }));
+          return;
+        }
         dispatch(setOrderInfo({ target: type, value: event.target.value }));
         break;
       case 'numberInput':
@@ -47,8 +51,8 @@ export const checkIfValidInput = (event, type, inputType, options) => {
   return (dispatch) => {
     switch (inputType) {
       case 'textinput':
-        //Validate if Input is empty
         if (event.target.value.trim() === '') {
+          //Validate if Input is empty
           dispatch(
             setOrderValidation({
               target: type,
@@ -59,6 +63,44 @@ export const checkIfValidInput = (event, type, inputType, options) => {
 
           return;
         }
+
+        //Validate if input is Card Expiry
+        if (type === 'cardExpiryDate' && event.target.value.length !== 7) {
+          dispatch(
+            setOrderValidation({
+              target: type,
+              invalid: true,
+              invalidText: 'Field has to be a valid expiry date',
+            })
+          );
+          return;
+        }
+        dispatch(
+          setOrderValidation({
+            target: type,
+            invalid: false,
+            invalidText: '',
+          })
+        );
+
+        //Validate if input is cvc
+        if (type === 'cvc' && event.target.value.length !== 3) {
+          dispatch(
+            setOrderValidation({
+              target: type,
+              invalid: true,
+              invalidText: 'Field has to be a valid cvc number',
+            })
+          );
+          return;
+        }
+        dispatch(
+          setOrderValidation({
+            target: type,
+            invalid: false,
+            invalidText: '',
+          })
+        );
 
         //Validate if input is email
         if (
@@ -83,12 +125,37 @@ export const checkIfValidInput = (event, type, inputType, options) => {
           })
         );
 
-        //Validate if input is plz
+        //Validate if input is card number
         if (
           options &&
-          options.local !== 'any' &&
+          options.cardNumber &&
+          !validator.isCreditCard(event.target.value, {
+            brands: [options.cardNumber],
+          })
+        ) {
+          dispatch(
+            setOrderValidation({
+              target: type,
+              invalid: true,
+              invalidText: `This number is not a valid ${options.cardNumber} card number`,
+            })
+          );
+          return;
+        }
+        dispatch(
+          setOrderValidation({
+            target: type,
+            invalid: false,
+            invalidText: '',
+          })
+        );
+
+        if (
+          options &&
+          options.local &&
           !validator.isPostalCode(event.target.value, options.local)
         ) {
+          //Validate if input is plz
           dispatch(
             setOrderValidation({
               target: type,

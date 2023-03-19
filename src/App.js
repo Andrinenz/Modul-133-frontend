@@ -19,6 +19,7 @@ import Logout from './pages/Logout/Logout';
 import Notification from './pages/Notification/Notification';
 import Dashboard from './pages/Dashboard/Dashboard';
 import Checkout from './pages/Checkout/Checkout';
+import CheckoutDone from './pages/Checkout/assets/CheckoutDone';
 
 /*----------------------------------------------------------------------------*/
 /* App                                                                        */
@@ -62,6 +63,14 @@ const App = () => {
                 element={
                   <RequireAuth>
                     <Checkout />
+                  </RequireAuth>
+                }
+              />
+              <Route
+                path='orderDone/:id'
+                element={
+                  <RequireAuth>
+                    <CheckoutDone />
                   </RequireAuth>
                 }
               />

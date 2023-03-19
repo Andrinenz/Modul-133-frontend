@@ -3,6 +3,8 @@
 /*----------------------------------------------------------------------------*/
 
 import { axiosAuth } from '../../helpers/axios';
+import { reset } from '../newOrder/newOrderSlice';
+import { addSuccessNotification } from '../notification/notificationSlice';
 import {
   addOrder,
   deleteOrder,
@@ -44,13 +46,23 @@ export const fetchOrderById = (id) => {
   };
 };
 
-export const fetchCreateOrder = (orderObj) => {
+export const fetchCreateOrder = (orderObj, navigate) => {
   return async (dispatch) => {
     try {
       let res = await axiosAuth.post('/api/order/createOrder', orderObj);
 
       if (res.status === 201) {
-        dispatch(addOrder(res.data.result));
+        dispatch(addOrder(res.data));
+        navigate(`/orderDone/${res.data.id}`);
+        dispatch(
+          addSuccessNotification({
+            message: 'OK',
+            description: 'Order successfully created',
+          })
+        );
+        setTimeout(() => {
+          dispatch(reset());
+        }, 1500);
       }
     } catch (err) {
       console.log(err);
