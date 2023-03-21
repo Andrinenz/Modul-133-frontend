@@ -2,16 +2,16 @@
 /* IMPORTS                                                                    */
 /*----------------------------------------------------------------------------*/
 
-import "./MainHeader.scss";
+import './MainHeader.scss';
 import {
   ShoppingCart,
   Login,
   Events,
   VisualRecognition,
-} from "@carbon/icons-react";
-import { Badge, Layout, Menu, theme } from "antd";
-import React from "react";
-import { useNavigate } from "react-router";
+} from '@carbon/icons-react';
+import { Badge, Layout, Menu, theme } from 'antd';
+import React from 'react';
+import { useNavigate } from 'react-router';
 const { Header } = Layout;
 
 /*----------------------------------------------------------------------------*/
@@ -21,50 +21,47 @@ const { Header } = Layout;
 const MainHeader = () => {
   const navigate = useNavigate();
 
-  const {
-    token: { colorBgContainer },
-  } = theme.useToken();
   return (
     <Layout>
       <Header
         style={{
-          position: "sticky",
+          position: 'sticky',
           top: 0,
           zIndex: 1,
-          width: "100%",
+          width: '100%',
         }}
       >
         <Menu
-          theme="dark"
-          mode="horizontal"
-          selectedKeys={["2"]}
+          theme='dark'
+          mode='horizontal'
+          selectedKeys={['2']}
           items={[
             {
-              key: "1",
+              key: '1',
               icon: <Login />,
-              label: "Login",
-              className: "NavLogin",
+              label: 'Login',
+              className: 'NavLogin',
             },
             {
-              key: "2",
+              key: '2',
               icon: <VisualRecognition />,
-              label: "Products",
-              className: "NavProducts",
+              label: 'Products',
+              className: 'NavProducts',
             },
             {
-              key: "3",
+              key: '3',
               icon: (
                 <Badge count={2}>
-                  <ShoppingCart size={"20"} />
+                  <ShoppingCart size={'20'} />
                 </Badge>
               ),
-              className: "NavCart",
+              className: 'NavCart',
             },
             {
-              key: "4",
+              key: '4',
               icon: <Events />,
-              label: "About",
-              className: "NavAbout",
+              label: 'About',
+              className: 'NavAbout',
             },
           ]}
         />
