@@ -10,12 +10,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 let initialState = {
   image: { value: '', invalid: null, invalidText: '' },
-  title: { value: '', invalid: null, invalidText: '' },
-  price: { value: '', invalid: null, invalidText: '' },
-  size: { value: '', invalid: null, invalidText: '' },
-  isArchived: { value: '', invalid: null, invalidText: '' },
-  description: { value: '', invalid: null, invalidText: '' },
-  itemsInStock: { value: '', invalid: null, invalidText: '' },
+  status: { value: 'uploading' },
 };
 
 export const newProductSlice = createSlice({
