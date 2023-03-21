@@ -21,6 +21,7 @@ import Dashboard from './pages/Dashboard/Dashboard';
 import Checkout from './pages/Checkout/Checkout';
 import CheckoutDone from './pages/Checkout/assets/CheckoutDone';
 import UserOrders from './pages/UserOrders/UserOrders';
+import OrderDetails from './pages/UserOrders/assets/OrderDetails';
 
 /*----------------------------------------------------------------------------*/
 /* App                                                                        */
@@ -80,6 +81,14 @@ const App = () => {
                 element={
                   <RequireAuth>
                     <UserOrders />
+                  </RequireAuth>
+                }
+              />
+              <Route
+                path='orders/myOrders/:id'
+                element={
+                  <RequireAuth>
+                    <OrderDetails />
                   </RequireAuth>
                 }
               />

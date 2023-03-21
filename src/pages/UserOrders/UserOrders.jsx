@@ -3,10 +3,13 @@
 /*----------------------------------------------------------------------------*/
 
 import { Loading } from '@carbon/react';
+import Table from 'ant-responsive-table';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router';
 import { getOrder } from '../../state/order/orderSelector';
 import { fetchUserOrders } from '../../state/order/orderThrunk';
+import './UserOrders.scss';
 
 /*----------------------------------------------------------------------------*/
 /* UserOrders                                                                 */
@@ -14,6 +17,7 @@ import { fetchUserOrders } from '../../state/order/orderThrunk';
 
 const UserOrders = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const { ordersByUser, loadedUserOrders } = useSelector(getOrder);
 
@@ -22,6 +26,36 @@ const UserOrders = () => {
       title: 'Firstname',
       dataIndex: 'firstname',
       key: 'firstname',
+      showOnResponse: true,
+      showOnDesktop: true,
+    },
+    {
+      title: 'Lastname',
+      dataIndex: 'lastname',
+      key: 'lastname',
+      showOnResponse: true,
+      showOnDesktop: true,
+    },
+    {
+      title: 'Email',
+      dataIndex: 'email',
+      key: 'email',
+      showOnResponse: true,
+      showOnDesktop: true,
+    },
+    {
+      title: 'Total Amount',
+      dataIndex: 'totalAmount',
+      key: 'totalAmount',
+      showOnResponse: true,
+      showOnDesktop: true,
+    },
+    {
+      title: 'Shipped',
+      dataIndex: 'shipped',
+      key: 'shipped',
+      showOnResponse: true,
+      showOnDesktop: true,
     },
   ];
 
@@ -44,14 +78,33 @@ const UserOrders = () => {
     return datesInLast14Days;
   };
 
+  const generateTableData = (orders) => {
+    let data = [];
+    orders.forEach((order) => {
+      data.push({
+        key: order.id.toString(),
+        firstname: order?.firstname,
+        lastname: order?.lastname,
+        email: order?.email,
+        totalAmount: order?.totalAmount + '.-',
+        shipped: order?.sentToShippingCompany ? 'Yes' : 'No',
+      });
+    });
+    return data;
+  };
+
+  const handleOnClick = (record) => {
+    let id = record.key;
+    navigate(`/orders/myOrders/${id}`);
+  };
+
   return (
     <>
       {loadedUserOrders ? (
         <div className='pt-4 pl-0 cds--offset-lg-3 cds--col-lg-10'>
-          {console.log(isDateIn14Days(ordersByUser))}
           <h1>Your Orders</h1>
           <div className='bcol-ibm-white'>
-            <div className='pt-2 pl-2 mt-2'>
+            <div className='pt-2 pl-2 pr-2 mt-2'>
               <div className='d-flex f-jb'>
                 <div className='d-flex pl-4 fd-c'>
                   <h5>Overall Orders</h5>
@@ -66,8 +119,21 @@ const UserOrders = () => {
                   </h2>
                 </div>
               </div>
-              <div className='mt-2'>
-                <h1>Table</h1>
+              <div className='mt-3 pb-4'>
+                <Table
+                  antTableProps={{
+                    pagination: false,
+                    columns,
+                    onRow: (record, rowIndex) => {
+                      return {
+                        onClick: () => handleOnClick(record),
+                      };
+                    },
+                    dataSource: generateTableData(ordersByUser),
+                    className: 'w100p pointer',
+                  }}
+                  mobileBreakPoint={610}
+                />
               </div>
             </div>
           </div>
