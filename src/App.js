@@ -15,10 +15,15 @@ import Products from './pages/Products/Products';
 import { getUser } from './state/user/userSelector';
 import { login } from './state/user/userThrunk';
 import Error404 from './pages/Error404/Error404';
-import Logout from './pages/Logout/Logout';
+import MainHeader from './pages/MainHeader/MainHeader';
+import Checkout from './pages/Checkout/Checkout';
 import Notification from './pages/Notification/Notification';
 import Dashboard from './pages/Dashboard/Dashboard';
-import Checkout from './pages/Checkout/Checkout';
+import Cart from './pages/Cart/Cart';
+import ItemOverview from './pages/ItemOverview/ItemOverview';
+import './cssClasses.scss';
+import 'antd/dist/reset.css';
+import Logout from './pages/Logout/Logout';
 import CheckoutDone from './pages/Checkout/assets/CheckoutDone';
 import UserOrders from './pages/UserOrders/UserOrders';
 import OrderDetails from './pages/UserOrders/assets/OrderDetails';
@@ -40,6 +45,7 @@ const App = () => {
       {loaded && (
         <>
           <div className='whole-page'>
+            <MainHeader />
             <Notification />
             <Routes>
               <Route index element={<Homepage />} />
@@ -53,6 +59,14 @@ const App = () => {
                 }
               />
               <Route
+                path='item/:id'
+                element={
+                  <RequireAuth>
+                    <ItemOverview />
+                  </RequireAuth>
+                }
+              />
+              <Route
                 path='dashboard'
                 element={
                   <RequireAuth roles={['Admin']}>
@@ -60,6 +74,7 @@ const App = () => {
                   </RequireAuth>
                 }
               />
+              <Route path='*' element={<Error404 />} />
               <Route
                 path='checkout'
                 element={
@@ -92,6 +107,14 @@ const App = () => {
                   </RequireAuth>
                 }
               />
+              {/*               <Route
+                path="cart"
+                element={
+                  <RequireAuth>
+                    <Cart />
+                  </RequireAuth>
+                }
+              /> */}
               <Route path='*' element={<Error404 />} />
               <Route path='logout' element={<Logout />} />
             </Routes>
