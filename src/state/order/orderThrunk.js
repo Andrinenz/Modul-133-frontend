@@ -12,7 +12,7 @@ import {
   setOrders,
   setOrdersByUser,
   updateOrderById,
-} from './orderSlice';
+} from './orderSlice.js';
 
 /*----------------------------------------------------------------------------*/
 /* orderThrunk                                                                */

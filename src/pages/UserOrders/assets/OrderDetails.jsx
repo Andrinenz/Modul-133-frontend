@@ -14,9 +14,14 @@ import { getOrder } from '../../../state/order/orderSelector';
 
 const OrderDetails = () => {
   const { id } = useParams();
-  const { ordersByUser, loadedUserOrders } = useSelector(getOrder);
+  console.log(id);
+  const { ordersByUser, orders, loadedUserOrders } = useSelector(getOrder);
 
-  const selectedOrder = ordersByUser.find((order) => order.id === parseInt(id));
+  console.log(orders);
+
+  const selectedOrder = loadedUserOrders
+    ? ordersByUser?.find((order) => order.id === parseInt(id))
+    : null;
 
   const formatDate = (date) => {
     let newDate = new Date(date);
