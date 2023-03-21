@@ -1,33 +1,78 @@
 .maincontent {
-  margin: 5rem;
-  min-height: 40rem;
+  margin: 2rem;
+  min-height: 42rem;
   border-radius: 10px;
   background-color: white;
-  margin-bottom: 2%;
 }
 
-.picture {
-  min-height: 20rem;
-  margin-top: 2%;
-  margin-left: 2%;
-  margin-right: 2%;
-  border-radius: 10px;
+.MainPicture {
   background-color: lightgray;
-}
-
-.title {
-  margin-top: 4%;
-  margin-left: 2%;
-  margin-right: 2%;
+  min-height: 30rem;
+  max-width: 25rem;
+  margin-left: 10%;
   border-radius: 10px;
-  min-height: 2rem;
-  background-color: darkgray;
 }
 
-.description {
-  background-color: gray;
-  min-height: 10rem;
-  margin-top: 2%;
+.SmallPicture1 {
+  background-color: lightgray;
+  margin-top: -31.5%;
+  max-width: 8%;
+  min-height: 7rem;
+  margin-left: 1%;
+  align-items: center;
+  border-radius: 10px;
+}
+.SmallPicture2 {
+  background-color: lightgray;
+  max-width: 8%;
+  min-height: 7rem;
+  margin-top: 3%;
+  margin-left: 1%;
+  border-radius: 10px;
+}
+.SmallPicture3 {
+  background-color: lightgray;
+  max-width: 8%;
+  min-height: 7rem;
+  margin-top: 3%;
+  margin-left: 1%;
+  border-radius: 10px;
+}
+
+.PictureTitle {
+  background-color: white;
+  margin-left: 45%;
+  margin-top: -28%;
+  margin-right: 10%;
+  border-radius: 10px;
+}
+
+.PictureAuthor {
+  background-color: white;
+}
+.PicturePrice {
+  background-color: white;
+}
+.PictureDescription {
+  background-color: white;
+}
+.PictureReview {
+  background-color: white;
+  margin-bottom: 4rem;
+}
+.PictureSizeInfo {
+  color: lightgray;
+  margin-bottom: 0.5rem;
+  min-height: 0.8rem;
+}
+
+.AddToCart {
+  background-color: white;
+}
+
+.ButtonATC {
+  min-height: 10%;
+  min-width: 10%;
 }
 
 .close {
