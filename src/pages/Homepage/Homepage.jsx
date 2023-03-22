@@ -25,7 +25,7 @@ const Homepage = () => {
           Zu unserem Webshop
         </button>
         <div classname='Logo'>
-          <img src={logo} height='150'></img>
+          <img src={logo} height='150' alt='homepage'></img>
         </div>
       </div>
     </div>

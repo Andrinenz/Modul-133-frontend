@@ -44,7 +44,7 @@ const Login = () => {
         modalOpen={modalOpen}
         handleModalClose={handleModalClose.bind(this)}
       />
-      <div className='cds--col-lg-9 pl-4 pr-4 box'>
+      <div className='cds--col-lg-9 pl-4 pr-4 box-login'>
         <div className='pt-3'>
           <div className='d-flex f-jc'>
             <h1 className='text-bold'>Login</h1>
