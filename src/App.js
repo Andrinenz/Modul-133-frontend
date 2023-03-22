@@ -44,8 +44,8 @@ const App = () => {
     <>
       {loaded && (
         <>
-          {/*  <MainHeader /> */}
           <div className='whole-page'>
+            <MainHeader />
             <Notification />
             <Routes>
               <Route index element={<Homepage />} />

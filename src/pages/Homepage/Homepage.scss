@@ -1,0 +1,72 @@
+.backgroundHome {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  overflow: hidden;
+  background-image: url(art.jpg);
+  background-size: 100%;
+}
+
+.box {
+  width: 100px;
+  height: 100px;
+  border: 1px solid black;
+}
+
+.flex-container {
+  background-color: #040303;
+  margin: 220px;
+  padding: 30px;
+  color: white;
+}
+
+.flex-container h1 {
+  font-size: 3rem;
+  font-family: "Times New Roman", Times, serif;
+}
+
+.flex-container h2 {
+  font-size: 2rem;
+  font-family: "Times New Roman", Times, serif;
+}
+
+.flex-container button {
+  font-size: 1.5rem;
+  padding: 7px;
+  margin-top: 4rem;
+  background-color: lightblue;
+  color: black;
+  font-family: "Times New Roman", Times, serif;
+}
+
+.flex-container img {
+  margin-top: -25rem;
+  margin-left: 85%;
+}
+
+@media only screen and (max-width: 1440px) {
+  .backgroundHome {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+    background-image: url(art.jpg);
+    background-size: 100%;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .backgroundHome {
+    margin: 0;
+    padding: 0;
+    height: 150%;
+    overflow: hidden;
+    background-image: url(art.jpg);
+    background-size: 150%;
+  }
+  .flex-container img {
+    margin-top: -27rem;
+    margin-left: 85%;
+    height: 100px;
+  }
+}
