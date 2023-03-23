@@ -3,6 +3,7 @@
 /*----------------------------------------------------------------------------*/
 
 import { axiosAuth } from '../../helpers/axios.js';
+import { fetchOrders } from '../dashboard/dashboardThrunk.js';
 import { addSuccessNotification } from '../notification/notificationSlice.js';
 import {
   setProducts,
@@ -75,6 +76,7 @@ export const fetchUpdateProduct = (productObj) => {
 
       if (res.status === 200) {
         dispatch(updateProductById(productObj));
+        dispatch(fetchOrders());
         dispatch(
           addSuccessNotification({
             message: 'OK',

@@ -2,21 +2,28 @@
 /* IMPORTS                                                                    */
 /*----------------------------------------------------------------------------*/
 
+import { View, ViewOff } from '@carbon/icons-react';
 import { Delivery, Purchase, UserProfile } from '@carbon/icons-react';
 import { Loading } from '@carbon/react';
-import { useSelector } from 'react-redux';
-import { useParams } from 'react-router';
+import { Button, FloatButton } from 'antd';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate, useParams } from 'react-router';
 import { getOrder } from '../../../state/order/orderSelector';
+import { fetchUserOrders } from '../../../state/order/orderThrunk';
 
 /*----------------------------------------------------------------------------*/
 /* OrderDetails                                                               */
 /*----------------------------------------------------------------------------*/
 
 const OrderDetails = () => {
-  const { id } = useParams();
-  const { ordersByUser, orders, loadedUserOrders } = useSelector(getOrder);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  console.log(orders);
+  const { id } = useParams();
+  const { ordersByUser, loadedUserOrders } = useSelector(getOrder);
+
+  const [viewOn, setViewOn] = useState(false);
 
   const selectedOrder = loadedUserOrders
     ? ordersByUser?.find((order) => order.id === parseInt(id))
@@ -27,7 +34,22 @@ const OrderDetails = () => {
     return `${newDate.getDate()}.${newDate.getMonth()}.${newDate.getFullYear()}`;
   };
 
+  const hideChars = (str, type) => {
+    if (type === 'card') {
+      const lengthToHide = Math.max(str.length - 4, 0); // hide all but the last 4 characters
+      const numRandomStars = Math.floor(Math.random() * 3); // add up to 2 additional random stars
+      const hidden = '*'.repeat(lengthToHide + numRandomStars);
+      return hidden + str.substring(lengthToHide);
+    } else {
+      return '*'.repeat(str.length);
+    }
+  };
+
   console.log(selectedOrder);
+
+  useEffect(() => {
+    dispatch(fetchUserOrders());
+  }, [dispatch]);
 
   return (
     <>
@@ -173,7 +195,7 @@ const OrderDetails = () => {
               </div>
             </div>
           </div>
-          {/*           <div className='mt-2'>
+          <div className='mt-2 pb-3'>
             <div className='d-flex f-jb fd-r pt-3 bcol-ibm-white pl-4 pr-5 prl'>
               <div className='d-flex fd-c'>
                 <div className='d-flex f-ac'>
@@ -183,6 +205,19 @@ const OrderDetails = () => {
                   <h1 className='smaller-font mb-0'>Payment details</h1>
                 </div>
                 <div className='mt-3 d-flex mb-3 fd-c'>
+                  <div className='d-flex mb-2'>
+                    <div>
+                      <h4>Total Amount:</h4>
+                    </div>
+                    <div>
+                      <h4 className='text-bold ml-1 h4'>
+                        {selectedOrder?.totalAmount
+                          ? selectedOrder?.totalAmount
+                          : '-'}
+                        .-
+                      </h4>
+                    </div>
+                  </div>
                   <div className='d-flex'>
                     <div>
                       <h4>Choosed Method:</h4>
@@ -211,70 +246,120 @@ const OrderDetails = () => {
                       </div>
                       <div className='d-flex'>
                         <div>
-                          <h4>City:</h4>
+                          <h4>Card Holder:</h4>
                         </div>
                         <div>
                           <h4 className='text-bold ml-1 h4'>
-                            {selectedOrder?.city ? selectedOrder?.city : '-'}
-                          </h4>
-                        </div>
-                      </div>
-                      <div className='d-flex'>
-                        <div>
-                          <h4>Address:</h4>
-                        </div>
-                        <div>
-                          <h4 className='text-bold ml-1 h4'>
-                            {selectedOrder?.address
-                              ? selectedOrder?.address
+                            {selectedOrder?.cardHolder
+                              ? selectedOrder?.cardHolder
                               : '-'}
                           </h4>
                         </div>
                       </div>
-                      <div className='d-flex'>
-                        <div>
-                          <h4>House number:</h4>
-                        </div>
-                        <div>
-                          <h4 className='text-bold ml-1 h4'>
-                            {selectedOrder?.apartementNumber
-                              ? selectedOrder?.apartementNumber
-                              : '-'}
-                          </h4>
-                        </div>
-                      </div>
-                      <div className='d-flex'>
-                        <div>
-                          <h4>PLZ:</h4>
-                        </div>
-                        <div>
-                          <h4 className='text-bold ml-1 h4'>
-                            {selectedOrder?.plz ? selectedOrder?.plz : '-'}
-                          </h4>
-                        </div>
-                      </div>
-                      <div className='d-flex mt-2'>
-                        <div>
-                          <h4>Shipped:</h4>
-                        </div>
-                        <div>
-                          <h4 className='text-bold ml-1 h4'>
-                            {selectedOrder?.sentToShippingCompany
-                              ? 'Yes'
-                              : 'No'}
-                          </h4>
-                        </div>
-                      </div>
+                      {!viewOn ? (
+                        <>
+                          <div className='d-flex'>
+                            <div>
+                              <h4>Card Number:</h4>
+                            </div>
+                            <div>
+                              <h4 className='text-bold ml-1 h4'>
+                                {selectedOrder?.cardNumber
+                                  ? hideChars(selectedOrder?.cardNumber, 'card')
+                                  : '-'}
+                              </h4>
+                            </div>
+                          </div>
+                          <div className='d-flex'>
+                            <div>
+                              <h4>CVC:</h4>
+                            </div>
+                            <div>
+                              <h4 className='text-bold ml-1 h4'>
+                                {selectedOrder?.cvc
+                                  ? hideChars(selectedOrder?.cvc)
+                                  : '-'}
+                              </h4>
+                            </div>
+                          </div>
+                          <div className='d-flex'>
+                            <div>
+                              <h4>Card expiry date:</h4>
+                            </div>
+                            <div>
+                              <h4 className='text-bold ml-1 h4'>
+                                {selectedOrder?.cardExpiryDate
+                                  ? hideChars(selectedOrder?.cardExpiryDate)
+                                  : '-'}
+                              </h4>
+                            </div>
+                          </div>
+                        </>
+                      ) : (
+                        <>
+                          <div className='d-flex'>
+                            <div>
+                              <h4>Card Number:</h4>
+                            </div>
+                            <div>
+                              <h4 className='text-bold ml-1 h4'>
+                                {selectedOrder?.cardNumber
+                                  ? selectedOrder?.cardNumber
+                                  : '-'}
+                              </h4>
+                            </div>
+                          </div>
+                          <div className='d-flex'>
+                            <div>
+                              <h4>CVC:</h4>
+                            </div>
+                            <div>
+                              <h4 className='text-bold ml-1 h4'>
+                                {selectedOrder?.cvc ? selectedOrder?.cvc : '-'}
+                              </h4>
+                            </div>
+                          </div>
+                          <div className='d-flex'>
+                            <div>
+                              <h4>Card expiry date:</h4>
+                            </div>
+                            <div>
+                              <h4 className='text-bold ml-1 h4'>
+                                {selectedOrder?.cardExpiryDate
+                                  ? selectedOrder?.cardExpiryDate
+                                  : '-'}
+                              </h4>
+                            </div>
+                          </div>
+                        </>
+                      )}
                     </>
                   ) : null}
                 </div>
               </div>
+              <div className='mt-2 cursor-pointer'>
+                {viewOn ? (
+                  <ViewOff onClick={() => setViewOn(false)} size={'32'} />
+                ) : (
+                  <View onClick={() => setViewOn(true)} size={'32'} />
+                )}
+              </div>
             </div>
-          </div> */}
+          </div>
+          <div className='d-flex f-je pb-3'>
+            <Button
+              size='large'
+              type='primary'
+              onClick={() => navigate('/orders')}
+            >
+              Go Back
+            </Button>
+          </div>
         </div>
       ) : (
         <Loading />
       )}
+      <FloatButton.BackTop />
     </>
   );
 };

@@ -12,11 +12,14 @@ import {
   OrderDetails,
 } from '@carbon/icons-react';
 import { Badge, Layout, Menu } from 'antd';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUser } from '../../state/user/userSelector';
 import { logoutUser } from '../../state/user/userSlice';
+import { getCard } from '../../state/card/cardSelector';
+import { fetchCardsFromUser } from '../../state/card/cardThrunk';
+import { reset } from '../../state/card/cardSlice';
 const { Header } = Layout;
 
 /*----------------------------------------------------------------------------*/
@@ -25,15 +28,21 @@ const { Header } = Layout;
 
 const MainHeader = () => {
   const { user, loaded } = useSelector(getUser);
+  const { cardByUser, loadedCardByUser } = useSelector(getCard);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();
 
-  const handleLogOut = () => {
+  useEffect(() => {
+    dispatch(fetchCardsFromUser());
+  }, [dispatch]);
+
+  const handleLogout = () => {
     navigate('/logout');
     dispatch(logoutUser());
     localStorage.removeItem('accessToken');
+    dispatch(reset());
   };
 
   let items = [
@@ -60,20 +69,22 @@ const MainHeader = () => {
           },
         }
       : null,
-    {
-      key: '45',
-      icon: <OrderDetails />,
-      label: 'Orders',
-      path: '/orders',
-      onClick: () => {
-        navigate('/orders');
-      },
-    },
+    loaded && user
+      ? {
+          key: '45',
+          icon: <OrderDetails />,
+          label: 'Orders',
+          path: '/orders',
+          onClick: () => {
+            navigate('/orders');
+          },
+        }
+      : null,
     loaded && user
       ? {
           key: '3',
           icon: (
-            <Badge count={2}>
+            <Badge count={cardByUser.length}>
               <ShoppingCart size={'20'} />
             </Badge>
           ),
@@ -92,7 +103,7 @@ const MainHeader = () => {
           path: '/logout',
           className: 'my-menu',
           onClick: () => {
-            handleLogOut();
+            handleLogout();
           },
         }
       : {
@@ -110,24 +121,26 @@ const MainHeader = () => {
     items.find((item) => item?.path === location.pathname)?.key || '';
 
   return (
-    <Layout>
-      <Header
-        style={{
-          position: 'sticky',
-          top: 0,
-          zIndex: 1,
-          width: '100%',
-        }}
-      >
-        <Menu
-          theme='dark'
-          mode='horizontal'
-          className='my-menu-whole'
-          selectedKeys={[selectedKey]}
-          items={items}
-        />
-      </Header>
-    </Layout>
+    <>
+      <Layout>
+        <Header
+          style={{
+            position: 'sticky',
+            top: 0,
+            zIndex: 1,
+            width: '100%',
+          }}
+        >
+          <Menu
+            theme='dark'
+            mode='horizontal'
+            className='my-menu-whole'
+            selectedKeys={[selectedKey]}
+            items={items}
+          />
+        </Header>
+      </Layout>
+    </>
   );
 };
 

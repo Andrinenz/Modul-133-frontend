@@ -44,9 +44,9 @@ const App = () => {
     <>
       {loaded && (
         <>
+          <MainHeader />
+          <Notification />
           <div className='whole-page'>
-            <MainHeader />
-            <Notification />
             <Routes>
               <Route index element={<Homepage />} />
               <Route path='login' element={<Login />} />
