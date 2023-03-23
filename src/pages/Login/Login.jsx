@@ -3,7 +3,7 @@
 /*----------------------------------------------------------------------------*/
 
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../../state/user/userThrunk.js';
 import React from 'react';
 import './Login.scss';
@@ -12,6 +12,7 @@ import { User } from '@carbon/icons-react';
 import { useNavigate } from 'react-router';
 import validator from 'validator';
 import AddUserModal from './assets/AddUserModal.jsx';
+import { getUser } from '../../state/user/userSelector.js';
 
 /*----------------------------------------------------------------------------*/
 /* Login                                                                      */
@@ -20,6 +21,8 @@ import AddUserModal from './assets/AddUserModal.jsx';
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const { buttonLoading } = useSelector(getUser);
 
   const [mail, setMail] = useState('');
   const [passw, setPassw] = useState('');
@@ -101,6 +104,7 @@ const Login = () => {
                   : true
               }
               onClick={() => handleOnClick()}
+              loading={buttonLoading}
             >
               Login
             </Button>

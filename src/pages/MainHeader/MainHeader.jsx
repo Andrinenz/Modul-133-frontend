@@ -8,6 +8,8 @@ import {
   VisualRecognition,
   Dashboard,
   Logout,
+  Login,
+  OrderDetails,
 } from '@carbon/icons-react';
 import { Badge, Layout, Menu } from 'antd';
 import React from 'react';
@@ -35,16 +37,18 @@ const MainHeader = () => {
   };
 
   let items = [
-    {
-      key: '2',
-      icon: <VisualRecognition />,
-      label: 'Products',
-      className: 'NavProducts',
-      path: '/products',
-      onClick: () => {
-        navigate('/products');
-      },
-    },
+    loaded && user
+      ? {
+          key: '2',
+          icon: <VisualRecognition />,
+          label: 'Products',
+          className: 'NavProducts',
+          path: '/products',
+          onClick: () => {
+            navigate('/products');
+          },
+        }
+      : null,
     user?.isAdmin
       ? {
           key: '5',
@@ -57,18 +61,29 @@ const MainHeader = () => {
         }
       : null,
     {
-      key: '3',
-      icon: (
-        <Badge count={2}>
-          <ShoppingCart size={'20'} />
-        </Badge>
-      ),
-      className: 'NavCart',
-      path: '/cart',
+      key: '45',
+      icon: <OrderDetails />,
+      label: 'Orders',
+      path: '/orders',
       onClick: () => {
-        navigate('/cart');
+        navigate('/orders');
       },
     },
+    loaded && user
+      ? {
+          key: '3',
+          icon: (
+            <Badge count={2}>
+              <ShoppingCart size={'20'} />
+            </Badge>
+          ),
+          className: 'NavCart',
+          path: '/cart',
+          onClick: () => {
+            navigate('/cart');
+          },
+        }
+      : null,
     loaded && user
       ? {
           key: '7',
@@ -80,7 +95,15 @@ const MainHeader = () => {
             handleLogOut();
           },
         }
-      : null,
+      : {
+          key: '5',
+          icon: <Login />,
+          label: 'Login/Sign up',
+          path: '/login',
+          onClick: () => {
+            navigate('/login');
+          },
+        },
   ];
 
   const selectedKey =

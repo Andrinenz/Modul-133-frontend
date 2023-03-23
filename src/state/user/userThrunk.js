@@ -2,7 +2,12 @@
 /* IMPORTS                                                                    */
 /*----------------------------------------------------------------------------*/
 
-import { logoutUser, setAccessToken, setUser } from './userSlice';
+import {
+  logoutUser,
+  setAccessToken,
+  setButtonLoading,
+  setUser,
+} from './userSlice';
 import { addErrorNotification } from '../notification/notificationSlice.js';
 import validator from 'validator';
 import jwtDecode from 'jwt-decode';
@@ -14,6 +19,7 @@ import { axiosAuth } from '../../helpers/axios';
 /*----------------------------------------------------------------------------*/
 const extractToken = async (email, password, start, navigate, dispatch) => {
   if (!start) {
+    dispatch(setButtonLoading(true));
     let res = await axios
       .post('http://localhost:8080/api/auth/login', {
         email: email,
@@ -69,6 +75,8 @@ export const login = (email, password, start, navigate, dispatch2) => {
     if (data.token === null || !data.valid) {
       dispatch(logoutUser());
     }
+
+    dispatch(setButtonLoading(false));
 
     if (data.valid) {
       dispatch(setAccessToken(data.token));

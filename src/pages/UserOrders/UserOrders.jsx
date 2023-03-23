@@ -95,7 +95,7 @@ const UserOrders = () => {
 
   const handleOnClick = (record) => {
     let id = record.key;
-    navigate(`/orders/myOrders/${id}`);
+    navigate(`/orders/myOrder/${id}`);
   };
 
   return (

@@ -14,7 +14,6 @@ import { getOrder } from '../../../state/order/orderSelector';
 
 const OrderDetails = () => {
   const { id } = useParams();
-  console.log(id);
   const { ordersByUser, orders, loadedUserOrders } = useSelector(getOrder);
 
   console.log(orders);
@@ -36,7 +35,9 @@ const OrderDetails = () => {
         <div className='cds--offset-lg-3 cds--col-lg-10 pl-0 pr-0 pt-4'>
           <h1 className='text-bold pl-2'>{`Order #${id}`}</h1>
           <div>
-            <h4 className='pl-2'>{formatDate(selectedOrder.createdAt)}</h4>
+            <h4 className='pl-2'>
+              From the {formatDate(selectedOrder.createdAt)}
+            </h4>
           </div>
           <div className='mt-3'>
             <div className='d-flex f-jb fd-r pt-3 bcol-ibm-white pl-4 pr-5 prl'>
@@ -172,7 +173,7 @@ const OrderDetails = () => {
               </div>
             </div>
           </div>
-          <div className='mt-2'>
+          {/*           <div className='mt-2'>
             <div className='d-flex f-jb fd-r pt-3 bcol-ibm-white pl-4 pr-5 prl'>
               <div className='d-flex fd-c'>
                 <div className='d-flex f-ac'>
@@ -269,7 +270,7 @@ const OrderDetails = () => {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       ) : (
         <Loading />

@@ -100,7 +100,7 @@ const App = () => {
                 }
               />
               <Route
-                path='orders/myOrders/:id'
+                path='orders/myOrder/:id'
                 element={
                   <RequireAuth>
                     <OrderDetails />
