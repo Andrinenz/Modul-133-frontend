@@ -23,8 +23,6 @@ const Stats = () => {
     dispatch(fetchUsers());
   }, [dispatch]);
 
-  console.log(orders);
-
   let options = {
     title: 'Active users',
     resizable: true,

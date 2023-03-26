@@ -1,6 +1,88 @@
-.bfield {
-    background-color: gray;
-    border-radius: -5%;
-    min-width: 80%;
-    height: 80%;
+.fixed-sidenav {
+  position: fixed;
+  right: 0;
+  top: 0;
+  overflow: auto;
+  overflow-x: hidden;
+  height: 100%;
+  border-left: 2px solid #a8a8a8;
+}
+
+.border-bottom {
+  border-bottom: 2px solid #8d8d8d;
+}
+
+.link-hover:hover {
+  text-decoration: underline #0062fe;
+}
+
+.payment-size {
+  width: 300px;
+}
+
+.title-box {
+  position: sticky;
+  top: 0;
+  background-color: #fff;
+  z-index: 999;
+}
+
+.radio-group * .ant-radio-inner {
+  width: 2rem !important;
+  height: 2rem !important;
+}
+
+.total-box {
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  border-top: 2px solid #8d8d8d;
+  background-color: #fff;
+  z-index: 999;
+}
+
+/* .item-box {
+  margin-left: 1rem;
+  margin-right: 1rem;
+  height: 15rem;
+} */
+
+//If you want to add picture to item box
+.img-item {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+
+@media only screen and (max-width: 400px) {
+  .payment-size {
+    width: 140px;
+  }
+}
+
+@media only screen and (max-width: 1055px) {
+  .fixed-sidenav {
+    position: fixed;
+    bottom: 0;
+    height: 24rem;
+    width: 100%;
+  }
+
+  .margin-res-top {
+    margin-top: 0.5rem;
+  }
+
+  .res-top {
+    top: 0;
+    position: fixed;
+    height: calc(100% - 24rem);
+    overflow-x: hidden;
+    margin-top: 24rem;
+    border-top: 2px solid #8d8d8d;
+  }
+
+  .margin-res {
+    padding-bottom: 5rem;
+  }
 }

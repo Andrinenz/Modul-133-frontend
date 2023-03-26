@@ -24,7 +24,7 @@ const Logout = () => {
         style={{ color: '#0f62fe' }}
         onClick={(e) => navigate('/login')}
       >
-        Login
+        Login back
       </p>
     </div>
   );

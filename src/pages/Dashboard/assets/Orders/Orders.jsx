@@ -116,10 +116,6 @@ const Orders = (props) => {
 
   let orders = props.data;
 
-  let totalAmount = orders;
-
-  console.log(totalAmount);
-
   const generateTableData = (orders) => {
     let data = [];
     orders.forEach((order) => {

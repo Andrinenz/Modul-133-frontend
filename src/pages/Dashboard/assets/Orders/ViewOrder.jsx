@@ -2,6 +2,7 @@
 /* IMPORTS                                                                    */
 /*----------------------------------------------------------------------------*/
 
+import { Link } from '@carbon/react';
 import { Button, Input, Modal, Select } from 'antd';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -24,12 +25,12 @@ const ViewOrder = (props) => {
     firstname: selectedOrder?.firstname,
     lastname: selectedOrder?.lastname,
     Cards: selectedOrder?.Cards,
-    email: selectedOrder?.User?.email,
+    email: selectedOrder?.email,
     address: selectedOrder?.address,
     apartementNumber: selectedOrder?.apartementNumber,
     state: selectedOrder?.state,
     paymentMethod: selectedOrder?.paymentMethod,
-    cvv: selectedOrder?.cvv,
+    cvc: selectedOrder?.cvc,
     plz: selectedOrder?.plz,
     country: selectedOrder?.country,
     cardHolder: selectedOrder?.cardHolder,
@@ -39,7 +40,7 @@ const ViewOrder = (props) => {
 
   useEffect(() => {
     setData({
-      email: selectedOrder?.User?.email,
+      email: selectedOrder?.email,
       firstname: selectedOrder?.firstname,
       Cards: selectedOrder?.Cards,
       lastname: selectedOrder?.lastname,
@@ -47,7 +48,7 @@ const ViewOrder = (props) => {
       apartementNumber: selectedOrder?.apartementNumber,
       state: selectedOrder?.state,
       paymentMethod: selectedOrder?.paymentMethod,
-      cvv: selectedOrder?.cvv ? selectedOrder?.cvv : ' ',
+      cvc: selectedOrder?.cvc ? selectedOrder?.cvc : ' ',
       plz: selectedOrder?.plz,
       country: selectedOrder?.country,
       cardHolder: selectedOrder?.cardHolder,
@@ -145,7 +146,7 @@ const ViewOrder = (props) => {
                     </div>
                     <div className='d-flex'>
                       <h5 className='text-no-bold'>Price:</h5>
-                      <h5 className='text-bold ml-1'>{card.Item.price}</h5>
+                      <h5 className='text-bold ml-1'>{card.Item.price}.-</h5>
                     </div>
                     <div className='d-flex'>
                       <h5 className='text-no-bold'>Stock:</h5>
@@ -159,7 +160,17 @@ const ViewOrder = (props) => {
                     </div>
                     <div className='d-flex'>
                       <h5 className='text-no-bold'>Image Link:</h5>
-                      <h5 className='text-bold ml-1'>{card.Item.image}</h5>
+                      <h5 className='text-bold ml-1'>
+                        <Link size='lg'>
+                          <a
+                            href={card.Item.image}
+                            target='_blank'
+                            rel='noreferrer'
+                          >
+                            Image
+                          </a>
+                        </Link>
+                      </h5>
                     </div>
                   </div>
                 );
@@ -289,11 +300,11 @@ const ViewOrder = (props) => {
               </div>
               <div className='d-flex pl-0 mt-2 pr-0'>
                 <div>
-                  <h5>CVV:</h5>
+                  <h5>CVC:</h5>
                   <Input
                     placeholder='cvv'
                     disabled={data.paymentMethod === 'PayPal' ? true : false}
-                    value={data.cvv}
+                    value={data.cvc}
                     onChange={(e) => handleKeyUp(e, 'cvv', 'textinput')}
                     size={'large'}
                   />

@@ -5,13 +5,16 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import './index.scss';
 import App from './App';
 import { store } from './state/store';
+import { Theme } from '@carbon/react';
 
 const container = document.getElementById('root');
 const root = createRoot(container);
 root.render(
   <Provider store={store}>
-    <Router>
-      <App />
-    </Router>
+    <Theme theme={'g10'}>
+      <Router>
+        <App />
+      </Router>
+    </Theme>
   </Provider>
 );

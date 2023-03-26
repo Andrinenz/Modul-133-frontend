@@ -1,8 +1,8 @@
-.my-menu-whole {
-  display: flex;
-  width: 100%;
+.minWidth6 {
+  min-width: 8rem;
 }
 
-.my-menu {
-  display: flex;
+.borderHeader * .cds--header__menu-item[aria-current='page']::after,
+.cds--header__menu-item--current::after {
+  border-bottom: 3px solid #393939 !important;
 }

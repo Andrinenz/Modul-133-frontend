@@ -31,7 +31,7 @@ const Dashboard = () => {
   return (
     <>
       {loadedUser && loadedOrders ? (
-        <div className='pt-4 pl-0 cds--offset-lg-3 cds--col-lg-10'>
+        <div className='pt-4 h100p pl-0 cds--offset-lg-3 cds--col-lg-10'>
           <h1>Dashboard</h1>
           <div className='mt-2'>
             <Tabs

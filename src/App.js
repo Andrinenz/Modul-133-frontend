@@ -21,10 +21,12 @@ import Notification from './pages/Notification/Notification';
 import Dashboard from './pages/Dashboard/Dashboard';
 import Cart from './pages/Cart/Cart';
 import ItemOverview from './pages/ItemOverview/ItemOverview';
-import './App.scss';
 import './cssClasses.scss';
 import 'antd/dist/reset.css';
 import Logout from './pages/Logout/Logout';
+import CheckoutDone from './pages/Checkout/assets/CheckoutDone';
+import UserOrders from './pages/UserOrders/UserOrders';
+import OrderDetails from './pages/UserOrders/assets/OrderDetails';
 
 /*----------------------------------------------------------------------------*/
 /* App                                                                        */
@@ -42,9 +44,9 @@ const App = () => {
     <>
       {loaded && (
         <>
+          <MainHeader />
+          <Notification />
           <div className='whole-page'>
-            <MainHeader />
-            <Notification />
             <Routes>
               <Route index element={<Homepage />} />
               <Route path='login' element={<Login />} />
@@ -81,14 +83,38 @@ const App = () => {
                   </RequireAuth>
                 }
               />
-              {/*               <Route
-                path="cart"
+              <Route
+                path='orderDone/:id'
+                element={
+                  <RequireAuth>
+                    <CheckoutDone />
+                  </RequireAuth>
+                }
+              />
+              <Route
+                path='orders'
+                element={
+                  <RequireAuth>
+                    <UserOrders />
+                  </RequireAuth>
+                }
+              />
+              <Route
+                path='orders/myOrder/:id'
+                element={
+                  <RequireAuth>
+                    <OrderDetails />
+                  </RequireAuth>
+                }
+              />
+              <Route
+                path='cart'
                 element={
                   <RequireAuth>
                     <Cart />
                   </RequireAuth>
                 }
-              /> */}
+              />
               <Route path='*' element={<Error404 />} />
               <Route path='logout' element={<Logout />} />
             </Routes>
