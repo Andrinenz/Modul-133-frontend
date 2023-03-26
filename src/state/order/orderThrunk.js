@@ -3,6 +3,7 @@
 /*----------------------------------------------------------------------------*/
 
 import { axiosAuth } from '../../helpers/axios';
+import { fetchCardsFromUser } from '../card/cardThrunk';
 import { reset } from '../newOrder/newOrderSlice';
 import { addSuccessNotification } from '../notification/notificationSlice';
 import {
@@ -77,6 +78,7 @@ export const fetchCreateOrder = (orderObj, navigate) => {
             description: 'Order successfully created',
           })
         );
+        dispatch(fetchCardsFromUser());
         setTimeout(() => {
           dispatch(reset());
         }, 1500);
