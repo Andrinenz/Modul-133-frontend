@@ -107,14 +107,14 @@ const App = () => {
                   </RequireAuth>
                 }
               />
-              {/*               <Route
-                path="cart"
+              <Route
+                path='cart'
                 element={
                   <RequireAuth>
                     <Cart />
                   </RequireAuth>
                 }
-              /> */}
+              />
               <Route path='*' element={<Error404 />} />
               <Route path='logout' element={<Logout />} />
             </Routes>

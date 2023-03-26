@@ -18,13 +18,13 @@ const Homepage = () => {
 
   return (
     <div className='backgroundHome'>
-      <div class='flex-container'>
+      <div className='flex-container'>
         <h1>Modul 133 BI20a</h1>
         <h2>Entwickler: Scherrer, Enz und Jenic</h2>
         <button className='cursor-pointer' onClick={() => handleOnClick()}>
           Zu unserem Webshop
         </button>
-        <div classname='Logo'>
+        <div className='Logo'>
           <img src={logo} height='150' alt='homepage'></img>
         </div>
       </div>

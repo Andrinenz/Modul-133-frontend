@@ -7,7 +7,7 @@ import { Favorite } from '@carbon/icons-react';
 import { StarHalf } from '@carbon/icons-react';
 import { StarFilled } from '@carbon/icons-react';
 import { Image } from '@carbon/icons-react';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import { getProduct } from '../../state/products/productsSelector';

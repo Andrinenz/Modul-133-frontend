@@ -45,8 +45,6 @@ const OrderDetails = () => {
     }
   };
 
-  console.log(selectedOrder);
-
   useEffect(() => {
     dispatch(fetchUserOrders());
   }, [dispatch]);

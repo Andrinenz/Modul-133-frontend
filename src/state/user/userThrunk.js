@@ -13,7 +13,6 @@ import validator from 'validator';
 import jwtDecode from 'jwt-decode';
 import axios from 'axios';
 import { axiosAuth } from '../../helpers/axios';
-import { fetchCardsFromUser } from '../card/cardThrunk';
 
 /*----------------------------------------------------------------------------*/
 /* userThrunk                                                                 */
@@ -83,7 +82,6 @@ export const login = (email, password, start, navigate, dispatch2) => {
       dispatch(setAccessToken(data.token));
       dispatch(setUser(data.user));
       dispatch(navigate('/products'));
-      dispatch(fetchCardsFromUser());
     }
   };
 };

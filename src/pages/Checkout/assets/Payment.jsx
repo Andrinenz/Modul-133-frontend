@@ -2,7 +2,7 @@
 /* IMPORTS                                                                    */
 /*----------------------------------------------------------------------------*/
 
-import { Select, Input, DatePicker } from 'antd';
+import { Select, Input } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { newOrderConfig } from '../../../libs/newOrderConfig';
 import { getNewOrder } from '../../../state/newOrder/newOrderSelector';
