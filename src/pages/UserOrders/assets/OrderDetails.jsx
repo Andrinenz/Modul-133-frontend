@@ -49,6 +49,8 @@ const OrderDetails = () => {
     dispatch(fetchUserOrders());
   }, [dispatch]);
 
+  console.log(selectedOrder);
+
   return (
     <>
       {loadedUserOrders ? (
@@ -143,7 +145,9 @@ const OrderDetails = () => {
                     </div>
                     <div>
                       <h4 className='text-bold ml-1 h4'>
-                        {selectedOrder?.city ? selectedOrder?.city : '-'}
+                        {selectedOrder?.city === 'null'
+                          ? '-'
+                          : selectedOrder?.city}
                       </h4>
                     </div>
                   </div>
