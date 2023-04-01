@@ -26,7 +26,7 @@ import 'antd/dist/reset.css';
 import Logout from './pages/Logout/Logout';
 import CheckoutDone from './pages/Checkout/assets/CheckoutDone';
 import UserOrders from './pages/UserOrders/UserOrders';
-import OrderDetails from './pages/UserOrders/assets/OrderDetails';
+import OrderDetails from './pages/OrderDetails/OrderDetails';
 
 /*----------------------------------------------------------------------------*/
 /* App                                                                        */
