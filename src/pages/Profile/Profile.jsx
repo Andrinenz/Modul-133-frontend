@@ -10,6 +10,7 @@ import { getUser } from '../../state/user/userSelector';
 import { fetchUserProfile } from '../../state/user/userThrunk';
 import FrameImg from './img/profile.png';
 import './Profile.scss';
+import { Email } from '@carbon/icons-react';
 
 /*----------------------------------------------------------------------------*/
 /* Profile                                                                    */
@@ -24,6 +25,8 @@ const Profile = () => {
     dispatch(fetchUserProfile(id));
   }, [dispatch, id]);
 
+  console.log(profile);
+
   return (
     <>
       {profileLoaded ? (
@@ -33,7 +36,14 @@ const Profile = () => {
               <div className='w100p mt-2'>
                 <img src={FrameImg} alt='Main' className='frame-img w100p' />
               </div>
-              <div className='bx-wrap mt-4'></div>
+              <div className='bx-wrap mt-4'>
+                <div className='bx-wrap fd-c cds--col-lg-7 cds--col-md-3 cds--col-lg-sm-4 mb-2'>
+                  <div className='d-flex f-jl f-ac mb-1'>
+                    <Email size={'20'} className='mr-1' />
+                    <h5>{profile?.email}</h5>
+                  </div>
+                </div>
+              </div>
             </Tile>
           </div>
         </div>

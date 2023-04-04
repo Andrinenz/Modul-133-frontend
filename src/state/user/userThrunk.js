@@ -15,7 +15,6 @@ import validator from 'validator';
 import jwtDecode from 'jwt-decode';
 import axios from 'axios';
 import { axiosAuth } from '../../helpers/axios';
-import { config } from '../../helpers/config';
 
 /*----------------------------------------------------------------------------*/
 /* userThrunk                                                                 */
