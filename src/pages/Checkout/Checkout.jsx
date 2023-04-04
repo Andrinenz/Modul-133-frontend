@@ -222,7 +222,7 @@ const Checkout = () => {
               </div>
             </div>
           </div>
-          <div className='d-flex fd-c cds--col-lg-5 pl-0 pr-0 fixed-sidenav bcol-ibm-white'>
+          <div className='d-flex mt-4 fd-c cds--col-lg-5 pl-0 pr-0 fixed-sidenav bcol-ibm-white'>
             <div className='title-box border-bottom f-jc f-ac mt-2'>
               <div className='d-flex f-ac f-jb'>
                 <h2 className='pl-3'>Total</h2>

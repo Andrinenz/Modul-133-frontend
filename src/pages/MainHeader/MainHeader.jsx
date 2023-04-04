@@ -118,6 +118,7 @@ const MainHeader = () => {
                       ? 'Not logged in'
                       : 'User'
                   }
+                  onClick={() => navigate(`/profile/${user?.id}`)}
                   tooltipAlignment='end'
                 >
                   <User size={20} />

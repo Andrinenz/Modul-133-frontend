@@ -16,6 +16,8 @@ export const userSlice = createSlice({
     buttonLoading: false,
     accessToken: '',
     user: null,
+    profile: null,
+    profileLoaded: false,
   },
   reducers: {
     setAccessToken: (state, { payload }) => {
@@ -47,13 +49,26 @@ export const userSlice = createSlice({
       state.user = null;
       state.loaded = true;
     },
+    getProfile: (state) => {
+      state.profileLoaded = false;
+    },
+    setProfile: (state, { payload }) => {
+      state.profile = payload;
+      state.profileLoaded = true;
+    },
   },
 });
 
 /*----------------------------------------------------------------------------*/
 /* EXPORTS                                                                    */
 /*----------------------------------------------------------------------------*/
-export const { setAccessToken, setButtonLoading, setUser, logoutUser } =
-  userSlice.actions;
+export const {
+  setAccessToken,
+  setButtonLoading,
+  setUser,
+  logoutUser,
+  getProfile,
+  setProfile,
+} = userSlice.actions;
 
 export default userSlice.reducer;
