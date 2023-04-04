@@ -2,16 +2,16 @@
 /* IMPORTS                                                                    */
 /*----------------------------------------------------------------------------*/
 
-import { axiosAuth } from '../../helpers/axios.js';
-import { fetchOrders } from '../dashboard/dashboardThrunk.js';
-import { addSuccessNotification } from '../notification/notificationSlice.js';
+import { axiosAuth } from "../../helpers/axios.js";
+import { fetchOrders } from "../dashboard/dashboardThrunk.js";
+import { addSuccessNotification } from "../notification/notificationSlice.js";
 import {
   setProducts,
   setProductById,
   updateProductById,
   addProduct,
   deleteProduct,
-} from './productsSlice.js';
+} from "./productsSlice.js";
 
 /*----------------------------------------------------------------------------*/
 /* productsThrunk                                                             */
@@ -20,7 +20,7 @@ import {
 export const fetchProductsData = () => {
   return async (dispatch) => {
     try {
-      let res = await axiosAuth.get('/api/items/getItems');
+      let res = await axiosAuth.get("/api/items/getItems");
 
       if (res.data.result) {
         dispatch(setProducts(res.data.result));
@@ -50,16 +50,16 @@ export const fetchUpdateProduct = (productObj) => {
   return async (dispatch) => {
     try {
       if (!productObj.id) {
-        console.log('No id given');
+        console.log("No id given");
       }
 
       const fields = [
-        'title',
-        'image',
-        'price',
-        'description',
-        'itemsInStock',
-        'isArchived',
+        "title",
+        "image",
+        "price",
+        "description",
+        "itemsInStock",
+        "isArchived",
       ];
 
       let valid = true;
@@ -69,18 +69,20 @@ export const fetchUpdateProduct = (productObj) => {
         }
       });
       if (valid) {
-        return console.log('Field not possible to update order');
+        return console.log("Field not possible to update order");
       }
 
-      const res = await axiosAuth.patch('/api/items/updateById', productObj);
+      console.log(productObj);
+
+      const res = await axiosAuth.patch("/api/items/updateById", productObj);
 
       if (res.status === 200) {
         dispatch(updateProductById(productObj));
         dispatch(fetchOrders());
         dispatch(
           addSuccessNotification({
-            message: 'OK',
-            description: 'Product updated successfully',
+            message: "OK",
+            description: "Product updated successfully",
           })
         );
       }
@@ -93,14 +95,14 @@ export const fetchUpdateProduct = (productObj) => {
 export const fetchCreateProduct = (productObj) => {
   return async (dispatch) => {
     try {
-      let res = await axiosAuth.post('/api/items/createItem', productObj);
+      let res = await axiosAuth.post("/api/items/createItem", productObj);
 
       if (res.status === 201) {
         dispatch(addProduct(res.data.result));
         dispatch(
           addSuccessNotification({
-            message: 'OK',
-            description: 'New Product created successfully',
+            message: "OK",
+            description: "New Product created successfully",
           })
         );
       }
@@ -113,7 +115,7 @@ export const fetchCreateProduct = (productObj) => {
 export const fetchDeleteProduct = (id) => {
   return async (dispatch) => {
     try {
-      await axiosAuth.delete('/api/items/deleteById', { data: { id } });
+      await axiosAuth.delete("/api/items/deleteById", { data: { id } });
 
       dispatch(deleteProduct({ id }));
     } catch (err) {

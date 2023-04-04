@@ -27,6 +27,7 @@ import Logout from './pages/Logout/Logout';
 import CheckoutDone from './pages/Checkout/assets/CheckoutDone';
 import UserOrders from './pages/UserOrders/UserOrders';
 import OrderDetails from './pages/OrderDetails/OrderDetails';
+import Profile from './pages/Profile/Profile';
 
 /*----------------------------------------------------------------------------*/
 /* App                                                                        */
@@ -112,6 +113,14 @@ const App = () => {
                 element={
                   <RequireAuth>
                     <Cart />
+                  </RequireAuth>
+                }
+              />
+              <Route
+                path='profile/:id'
+                element={
+                  <RequireAuth>
+                    <Profile />
                   </RequireAuth>
                 }
               />
