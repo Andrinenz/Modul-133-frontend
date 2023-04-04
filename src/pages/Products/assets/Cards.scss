@@ -1,7 +1,7 @@
 .Cards {
   display: flex;
   display: inline-flex;
-  background-color: gray;
+  background-color: #fff;
   height: 15rem;
   width: 18rem;
   margin: 2rem;
@@ -13,4 +13,9 @@
 
 .ProductTitle {
   color: black;
+}
+
+.PicturePreview {
+  max-width: fit-content;
+  max-height: 7rem;
 }

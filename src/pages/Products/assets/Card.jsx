@@ -20,8 +20,12 @@ const Card = (props) => {
   return (
     <div className="d-flex bx-wrap BackGround">
       <div className="Cards">
-        <div className="ProductTitle">
+        <div className="ProductTitle d-flex fd-c f-jc fac">
           <h3>{data?.title}</h3>
+          <img className="PicturePreview" src={data?.image} />
+          <div className="ProductPrice">
+            <h3>{data?.price}.-</h3>
+          </div>
         </div>
       </div>
     </div>

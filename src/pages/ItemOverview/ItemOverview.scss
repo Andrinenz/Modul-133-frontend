@@ -1,56 +1,9 @@
-.maincontent {
-  margin: 2rem;
-  min-height: 42rem;
-  border-radius: 10px;
-  background-color: white;
-}
-
 .MainPicture {
-  background-color: lightgray;
-  min-height: 15%;
-  max-width: 25%;
-  margin-top: 5%;
-  margin-left: 10%;
-  border-radius: 10px;
+  height: 30rem;
+  width: fit-content;
+  margin-right: 5%;
 }
 
-.PictureTitle {
-  background-color: white;
-  margin-left: 45%;
-  margin-top: -40%;
-  margin-right: 10%;
-  border-radius: 10px;
-}
-
-.PictureAuthor {
-  background-color: white;
-}
-.PicturePrice {
-  background-color: white;
-}
-.PictureDescription {
-  background-color: white;
-}
-.PictureReview {
-  background-color: white;
-  margin-bottom: 4rem;
-}
-.PictureSizeInfo {
-  color: lightgray;
-  margin-bottom: 0.5rem;
-  min-height: 0.8rem;
-}
-
-.AddToCart {
-  background-color: white;
-}
-
-.ButtonATC {
-  min-height: 10%;
-  min-width: 10%;
-}
-
-.close {
-  float: right;
-  min-height: fit-content;
+.main {
+  border-radius: -15px;
 }
