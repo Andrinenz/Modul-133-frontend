@@ -40,9 +40,9 @@ export const fetchCreateCard = (obj) => {
         );
       }
 
-      let res = await axiosAuth.post("/api/card/createCard");
+      let res = await axiosAuth.post("/api/card/createCard", obj);
 
-      if (res.status === 200) {
+      if (res.status === 201) {
         dispatch(
           addSuccessNotification({
             message: res.statusText,
@@ -50,6 +50,7 @@ export const fetchCreateCard = (obj) => {
           })
         );
         dispatch(addCard(res.data.result));
+        dispatch(fetchCardsFromUser());
       }
     } catch (err) {
       console.log(err);
