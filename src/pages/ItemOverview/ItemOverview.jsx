@@ -17,7 +17,7 @@ import { getProduct } from "../../state/products/productsSelector";
 import { resetProductById } from "../../state/products/productsSlice";
 import { fetchProductById } from "../../state/products/productsThrunk";
 import "./ItemOverview.scss";
-
+import { Button, Dropdown, Space } from "antd";
 /*----------------------------------------------------------------------------*/
 /* ItemOverview                                                                   */
 /*----------------------------------------------------------------------------*/
@@ -49,6 +49,45 @@ const ItemOverview = () => {
 
     dispatch(fetchCreateCard(obj));
   };
+
+  const items = [
+    {
+      key: "1",
+      label: (
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://www.antgroup.com"
+        >
+          1st menu item
+        </a>
+      ),
+    },
+    {
+      key: "2",
+      label: (
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://www.aliyun.com"
+        >
+          2nd menu item
+        </a>
+      ),
+    },
+    {
+      key: "3",
+      label: (
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://www.luohanacademy.com"
+        >
+          3rd menu item
+        </a>
+      ),
+    },
+  ];
 
   return (
     /*     <>
@@ -119,9 +158,19 @@ const ItemOverview = () => {
             <StarHalf />
             56
           </div>
+          <Dropdown
+            menu={{
+              items,
+            }}
+            placement="bottom"
+          >
+            <Button>bottom</Button>
+          </Dropdown>
+
           <div className="Price">
             <h2>{productById?.price}.-</h2>
           </div>
+
           <div className="AddToCart">
             <Button icon={<ShoppingCart />} onClick={() => handleOnClick()}>
               Add
