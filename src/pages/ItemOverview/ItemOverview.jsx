@@ -101,13 +101,13 @@ const ItemOverview = () => {
       )}
     </> */
     <>
-      <div className="title d-flex f-jc">
-        <h1>{productById?.title}</h1>
-      </div>
       <div className="main d-flex bcol-ibm-white cds--offset-lg-3 cds--col-lg-10 pl-0 pr-0 f-jc">
         <div className=""></div>
         <img className="MainPicture" src={productById?.image} />
         <div className="d-flex fd-c f-jc">
+          <div className="title d-flex f-jc">
+            <h1>{productById?.title}</h1>
+          </div>
           <div classname="Description">
             <h3>{productById?.description}</h3>
           </div>
