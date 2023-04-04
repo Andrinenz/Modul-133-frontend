@@ -38,7 +38,7 @@ const Profile = () => {
               </div>
               <div className="bx-wrap mt-4">
                 <div className="bx-wrap fd-c cds--col-lg-7 cds--col-md-3 cds--col-lg-sm-4 mb-2">
-                  <div className="d-flex f-jl f-ac mb-1">
+                  <div className="d-flex f-j f-ac">
                     <Email size={"20"} className="mr-1" />
                     <h5>{profile?.email}</h5>
                   </div>
