@@ -2,11 +2,12 @@
 /* IMPORTS                                                                    */
 /*----------------------------------------------------------------------------*/
 
-import ItemInCard from './assets/ItemInCard';
-import { ShoppingCartMinus } from '@carbon/icons-react';
-import { Button } from 'antd';
-import { Image } from '@carbon/icons-react';
-import './Cart.scss';
+import ItemInCard from "./assets/ItemInCard";
+import { ShoppingCartMinus } from "@carbon/icons-react";
+import { Button } from "antd";
+import { Image } from "@carbon/icons-react";
+import { ArrowRight } from "@carbon/icons-react";
+import "./Cart.scss";
 
 /*----------------------------------------------------------------------------*/
 /* Cart                                                                       */
@@ -54,13 +55,17 @@ import './Cart.scss';
 
 const Cart = () => {
   return (
-    <div className='bx-wrap'>
-      <div className='d-flex pt-4 cds--col-lg-11 pl-0 pr-0'>
-        <div className='cds--offset-lg-2 cds--col-lg-12 pl-0 pr-0'>
-          <div className='d-flex f-ac f-jb'>
-            <h2 className='text-bold'>My Shopping Bag (2)</h2>
+    <div className="bx-wrap">
+      <div className="d-flex pt-4 cds--col-lg-11 pl-0 pr-0">
+        <div className="cds--offset-lg-2 cds--col-lg-12 pl-0 pr-0">
+          <div className="d-flex f-ac f-jb">
+            <h2 className="text-bold">My Cart</h2>
             <h6>
-              <a href='/products'>Continue shopping</a>
+              <a href="/products">
+                <Button className="cursor-pointer">
+                  Continue shopping {<ArrowRight className="arrow" />}
+                </Button>
+              </a>
             </h6>
           </div>
           <ItemInCard />
@@ -74,8 +79,8 @@ const Cart = () => {
           <ItemInCard />
         </div>
       </div>
-      <div className='cds--col-lg-5 mt-4 pt-0 pl-0 pr-0 bcol-ibm-white fixed-sidenav'>
-        <div className='d-flex sum-box f-jc'>
+      <div className="cds--col-lg-5 mt-4 pt-0 pl-0 pr-0 bcol-ibm-white fixed-sidenav">
+        <div className="d-flex sum-box f-jc">
           <h1>Summe:</h1>
         </div>
       </div>
