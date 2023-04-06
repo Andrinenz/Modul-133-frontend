@@ -1,0 +1,28 @@
+.border-right {
+  border-right: 1px solid #c6c6c6;
+}
+
+.border-top {
+  border-top: 1px solid #c6c6c6;
+}
+
+.border-bottom {
+  border-bottom: 1px solid #c6c6c6;
+}
+
+.fixed-sidenav {
+  position: fixed;
+  right: 0;
+  top: 0;
+  overflow: auto;
+  overflow-x: hidden;
+  height: 100%;
+  border-left: 2px solid #a8a8a8;
+}
+
+.sum-box {
+  position: sticky;
+  top: 0;
+  background-color: #fff;
+  z-index: 999;
+}
