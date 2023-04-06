@@ -19,40 +19,7 @@ import "./Cart.scss";
       choosedSize: "S",
     };
   };
-  return (
-    <>
-      <div className="title mt-3 d-f f-jc">
-        <h1>My Cart</h1>
-      </div>
-      <div className="main d-flex bcol-ibm-white cds--offset-lg-10 cds--col-lg-4 pl-0 pr-0 f-jc mt-5 fd-r">
-        <h1>Checkout</h1>
-      </div>
-      <div className="main d-flex bcol-ibm-white cds--offset-lg-1 cds--col-lg-8 pl-0 pr-0 f-jc fd-r">
-        <div className="d-flex f-jc fd-c">
-          <div className="title d-flex f-jc">
-            <h2>title</h2>
-          </div>
-          <div classname="Description">
-            <h4>description</h4>
-          </div>
-          <div className="Price">
-            <h3>Price.-</h3>
-          </div>
-          <div className="RemoveFromCart">
-            <Button
-              className="RFC"
-              icon={<ShoppingCartMinus />}
-              onClick={() => handleOnClick()}
-            >
-              remove
-            </Button>
-          </div>
-        </div>
-      </div>
-    </>
-  );
-}; */
-
+ */
 const Cart = () => {
   return (
     <div className="bx-wrap">
@@ -62,7 +29,7 @@ const Cart = () => {
             <h2 className="text-bold">My Cart</h2>
             <h6>
               <a href="/products">
-                <Button className="cursor-pointer">
+                <Button className="cursor-pointer ct">
                   Continue shopping {<ArrowRight className="arrow" />}
                 </Button>
               </a>
@@ -80,8 +47,23 @@ const Cart = () => {
         </div>
       </div>
       <div className="cds--col-lg-5 mt-4 pt-0 pl-0 pr-0 bcol-ibm-white fixed-sidenav">
-        <div className="d-flex sum-box f-jc">
-          <h1>Summe:</h1>
+        <div className="d-flex sum-box f-jc fd-c ml-4 mr-4">
+          <div className="d-flex f-jb mt-2">
+            <span>Subtotal</span>
+            <span>$2000</span>
+          </div>
+          <div className="d-flex f-jb mt-2">
+            <span>Shipping</span>
+            <span>$25</span>
+          </div>
+          <div className="d-flex f-jb mt-2">
+            <h3>Total</h3>
+            <h3>$2025</h3>
+          </div>
+          <Button className="mt-4">Proceed to Checkout</Button>
+          <Button className="mt-2">
+            <img src="" alt="PayPalLogo" />
+          </Button>
         </div>
       </div>
     </div>
