@@ -7,6 +7,9 @@ import { ShoppingCartMinus } from "@carbon/icons-react";
 import { Button } from "antd";
 import { Image } from "@carbon/icons-react";
 import { ArrowRight } from "@carbon/icons-react";
+import { Purchase } from "@carbon/icons-react";
+import { DeliveryParcel } from "@carbon/icons-react";
+import { DataShare } from "@carbon/icons-react";
 import "./Cart.scss";
 
 /*----------------------------------------------------------------------------*/
@@ -60,10 +63,33 @@ const Cart = () => {
             <h3>Total</h3>
             <h3>$2025</h3>
           </div>
-          <Button className="mt-4">Proceed to Checkout</Button>
-          <Button className="mt-2">
-            <img src="" alt="PayPalLogo" />
-          </Button>
+          <div className="d-flex fd-c f-jc">
+            <Button className="mt-4">Proceed to Checkout</Button>
+            <Button className="mt-2">
+              <img src="" alt="PayPalLogo" />
+            </Button>
+          </div>
+          <div className="border-bottom pl-2 pt-2"></div>
+          <div className="d-flex f-jb mt-2">
+            <h3>
+              <Purchase />
+            </h3>
+            <h4>Payment</h4>
+          </div>
+          <div className="border-bottom pl-2 pt-2"></div>
+          <div className="d-flex f-jb mt-2">
+            <h3>
+              <DeliveryParcel />
+            </h3>
+            <h4>Shipping & Delivery</h4>
+          </div>
+          <div className="border-bottom pl-2 pt-2"></div>
+          <div className="d-flex f-jb mt-2">
+            <h3>
+              <DataShare />
+            </h3>
+            <h4>Returns & Exchanges</h4>
+          </div>
         </div>
       </div>
     </div>
