@@ -26,3 +26,38 @@
   background-color: #fff;
   z-index: 999;
 }
+
+@media only screen and (max-width: 1055px) {
+  .fixed-sidenav {
+    position: fixed;
+    bottom: 0;
+    height: 24rem;
+    width: 100%;
+  }
+
+  .margin-res-top {
+    margin-top: 3rem;
+  }
+
+  .border-bottom-res {
+    border-bottom: 2px solid #8d8d8d;
+  }
+
+  .margin-l-r-res {
+    margin-left: 2rem;
+    margin-right: 2rem;
+  }
+
+  .res-top {
+    top: 0;
+    position: fixed;
+    height: calc(100% - 24rem);
+    overflow-x: hidden;
+    margin-top: 24rem;
+    border-top: 2px solid #8d8d8d;
+  }
+
+  .margin-res {
+    padding-bottom: 5rem;
+  }
+}
