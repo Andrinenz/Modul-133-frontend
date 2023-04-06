@@ -3,9 +3,11 @@
 /*----------------------------------------------------------------------------*/
 
 import {
+  getProfile,
   logoutUser,
   setAccessToken,
   setButtonLoading,
+  setProfile,
   setUser,
 } from './userSlice';
 import { addErrorNotification } from '../notification/notificationSlice.js';
@@ -33,6 +35,7 @@ const extractToken = async (email, password, start, navigate, dispatch) => {
               description: 'Wrong Email or password entered',
             })
           );
+          dispatch(setButtonLoading(false));
         }
       });
 
@@ -45,8 +48,10 @@ const extractToken = async (email, password, start, navigate, dispatch) => {
         return { valid: true, token: token, user: decodedUser };
       }
     } else {
+      dispatch(setButtonLoading(false));
       return { valid: false, token: null, user: null };
     }
+    dispatch(setButtonLoading(false));
   } else {
     let localStorageToken = localStorage.getItem('accessToken');
     if (
@@ -61,6 +66,7 @@ const extractToken = async (email, password, start, navigate, dispatch) => {
         return { valid: true, token: localStorageToken, user: decodedUser };
       }
       console.log('token abgelaufen', localStorageToken);
+      dispatch(setButtonLoading(false));
       return { valid: false, token: null, user: null };
     } else {
       return { valid: false, token: null, user: null };
@@ -113,6 +119,23 @@ export const fetchCreateUser = (obj, navigate) => {
         }
       }
     } catch (err) {}
+  };
+};
+
+export const fetchUserProfile = (id) => {
+  return async (dispatch) => {
+    dispatch(getProfile());
+    try {
+      const res = await axiosAuth.get(`/api/user/getUserById?id=${id}`);
+      dispatch(setProfile(res.data.result));
+    } catch (err) {
+      dispatch(
+        addErrorNotification({
+          message: 'Error',
+          description: err.toString(),
+        })
+      );
+    }
   };
 };
 

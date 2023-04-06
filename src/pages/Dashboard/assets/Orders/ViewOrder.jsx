@@ -167,7 +167,7 @@ const ViewOrder = (props) => {
                             target='_blank'
                             rel='noreferrer'
                           >
-                            Image
+                            Link
                           </a>
                         </Link>
                       </h5>
