@@ -100,7 +100,7 @@ const ItemOverview = () => {
       )}
     </> */
     <>
-      <div className="main d-flex bcol-ibm-white cds--offset-lg-3 cds--col-lg-10 pl-0 pr-0 f-jc">
+      <div className="main d-flex bcol-ibm-white cds--offset-lg-3 cds--col-lg-10 pl-0 pr-0 mt-6">
         <div className=""></div>
         <img className="MainPicture" src={productById?.image} />
         <div className="d-flex fd-c f-jc">
