@@ -2,7 +2,7 @@
 /* IMPORTS                                                                    */
 /*----------------------------------------------------------------------------*/
 
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 /*----------------------------------------------------------------------------*/
 /* cardSlice                                                                  */
@@ -17,7 +17,7 @@ const initialState = {
 };
 
 export const cardSlice = createSlice({
-  name: 'card',
+  name: "card",
   initialState: { ...initialState },
   reducers: {
     setCardsbyUser: (state, { payload }) => {
@@ -31,6 +31,16 @@ export const cardSlice = createSlice({
     addCard: (state, { payload }) => {
       state.cards.push(payload);
     },
+    updateCardById: (state, { payload }) => {
+      state.cardByUser = state.cardByUser.map((card) => {
+        if (card.id === payload.id) {
+          card.choosedSize = payload.choosedSize;
+          card.itemCount = payload.itemCount;
+          card.isArchived = payload.isArchived;
+        }
+        return card;
+      });
+    },
     reset: (state, { payload }) => {
       return { ...initialState };
     },
@@ -40,6 +50,7 @@ export const cardSlice = createSlice({
 /*----------------------------------------------------------------------------*/
 /* EXPORTS                                                                    */
 /*----------------------------------------------------------------------------*/
-export const { setCards, setCardsbyUser, addCard, reset } = cardSlice.actions;
+export const { setCards, updateCardById, setCardsbyUser, addCard, reset } =
+  cardSlice.actions;
 
 export default cardSlice.reducer;
