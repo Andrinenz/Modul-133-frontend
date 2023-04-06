@@ -33,7 +33,7 @@ const Cart = () => {
             <h6>
               <a href="/products">
                 <Button className="cursor-pointer ct">
-                  Continue shopping {<ArrowRight className="arrow" />}
+                  Continue shopping {<ArrowRight size="20" className="arrow" />}
                 </Button>
               </a>
             </h6>
@@ -70,25 +70,34 @@ const Cart = () => {
             </Button>
           </div>
           <div className="border-bottom pl-2 pt-2"></div>
-          <div className="d-flex f-jb mt-2">
+          <div className="d-flex f-jb mt-2 cursor-pointer">
             <h3>
-              <Purchase />
+              <Purchase size="32" />
             </h3>
-            <h4>Payment</h4>
+            <div className="d-flex fd-c mr-5">
+              <h4>Payment</h4>
+              <p className="text-lighter">Complimentary</p>
+            </div>
           </div>
           <div className="border-bottom pl-2 pt-2"></div>
-          <div className="d-flex f-jb mt-2">
+          <div className="d-flex f-jb mt-2 cursor-pointer">
             <h3>
-              <DeliveryParcel />
+              <DeliveryParcel size="32" />
             </h3>
-            <h4>Shipping & Delivery</h4>
+            <div className="d-flex fd-c mr-2">
+              <h4>Shipping & Delivery</h4>
+              <p className="text-lighter">Complimentary</p>
+            </div>
           </div>
           <div className="border-bottom pl-2 pt-2"></div>
-          <div className="d-flex f-jb mt-2">
+          <div className="d-flex f-jb mt-2 cursor-pointer">
             <h3>
-              <DataShare />
+              <DataShare size="32" />
             </h3>
-            <h4>Returns & Exchanges</h4>
+            <div className="d-flex fd-c">
+              <h4>Returns & Exchanges</h4>
+              <p className="text-lighter">Complimentary</p>
+            </div>
           </div>
         </div>
       </div>

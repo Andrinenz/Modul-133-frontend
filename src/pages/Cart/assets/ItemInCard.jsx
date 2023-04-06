@@ -31,24 +31,23 @@ const ItemInCard = (props) => {
               <div className="p-2">
                 <h5 className="mb-0">
                   <Button className="cursor-pointer">
-                    Details{<InformationSquare />}
+                    Details{<InformationSquare size="20" />}
                   </Button>
                 </h5>
               </div>
             </div>
             <div className="d-flex f-ac f-jc pr-0 pl-0 cds--col-lg-8">
-              <h5 className="mb-0">
+              <div className="mb-0">
                 <Button className="cursor-pointer">
-                  {<ShoppingCartMinus />}
-                </Button>
-                <p>2</p>
-                <Button className="cursor-pointer">
-                  {<ShoppingCartPlus />}
+                  {<ShoppingCartMinus size="20" />}
                 </Button>
                 <Button className="cursor-pointer">
-                  {<ShoppingCartClear />}
+                  {<ShoppingCartPlus size="20" />}
                 </Button>
-              </h5>
+                <Button className="cursor-pointer">
+                  {<ShoppingCartClear size="20" />}
+                </Button>
+              </div>
             </div>
           </div>
         </div>
