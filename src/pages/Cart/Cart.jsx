@@ -3,10 +3,7 @@
 /*----------------------------------------------------------------------------*/
 
 import ItemInCard from "./assets/ItemInCard";
-import { ShoppingCartMinus } from "@carbon/icons-react";
 import { Button } from "antd";
-import { Image } from "@carbon/icons-react";
-import { ArrowRight } from "@carbon/icons-react";
 import { Purchase } from "@carbon/icons-react";
 import { DeliveryParcel } from "@carbon/icons-react";
 import { DataShare } from "@carbon/icons-react";

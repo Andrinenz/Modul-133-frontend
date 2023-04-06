@@ -3,7 +3,6 @@
 /*----------------------------------------------------------------------------*/
 import { Add, Subtract } from "@carbon/icons-react";
 import { Button, InputNumber } from "antd";
-import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { fetchUpdateCardById } from "../../../state/card/cardThrunk";
 /*----------------------------------------------------------------------------*/
