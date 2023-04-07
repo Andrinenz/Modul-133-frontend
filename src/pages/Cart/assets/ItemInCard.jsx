@@ -1,10 +1,14 @@
 /*----------------------------------------------------------------------------*/
 /* IMPORTS                                                                    */
 /*----------------------------------------------------------------------------*/
-import { Add, Subtract } from "@carbon/icons-react";
+import { Add, Information, Subtract, View } from "@carbon/icons-react";
 import { Button, InputNumber } from "antd";
 import { useDispatch } from "react-redux";
-import { fetchUpdateCardById } from "../../../state/card/cardThrunk";
+import {
+  fetchDeleteCard,
+  fetchUpdateCardById,
+} from "../../../state/card/cardThrunk";
+import { useNavigate } from "react-router";
 /*----------------------------------------------------------------------------*/
 /* ItemInCard                                                                 */
 /*----------------------------------------------------------------------------*/
@@ -13,6 +17,7 @@ const ItemInCard = (props) => {
   let data = props.data;
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleAddSub = (type) => {
     if (type === "plus") {
@@ -35,7 +40,9 @@ const ItemInCard = (props) => {
     }
   };
 
-  console.log(data);
+  const handleOnDelete = () => {
+    dispatch(fetchDeleteCard(data?.id));
+  };
 
   return (
     <div className="mb-2">
@@ -91,13 +98,21 @@ const ItemInCard = (props) => {
             </div>
           </div>
           <div className="d-flex border-top">
-            <div className="d-flex f-ac f-jc pl-0 pr-0 cds--col-lg-8 border-right">
-              <div className="p-2">
+            <div
+              className="d-flex f-ac cursor-pointer f-jc pl-0 pr-0 hover-item cds--col-lg-8 border-right"
+              onClick={() => navigate(`/item/${data?.Item?.id}`)}
+            >
+              <div className="p-2 d-flex f-ac">
+                <Information size={"20"} className="mr-1" />
                 <h5 className="mb-0">Details</h5>
               </div>
             </div>
-            <div className="d-flex f-ac f-jc pr-0 pl-0 cds--col-lg-8">
-              <div className="p-2">
+            <div
+              className="d-flex f-ac cursor-pointer f-jc hover-item pr-0 pl-0 cds--col-lg-8"
+              onClick={() => handleOnDelete()}
+            >
+              <div className="p-2 d-flex f-ac">
+                <View size={"20"} className="mr-1" />
                 <h5 className="mb-0">Delete item</h5>
               </div>
             </div>

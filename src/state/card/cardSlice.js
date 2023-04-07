@@ -41,6 +41,9 @@ export const cardSlice = createSlice({
         return card;
       });
     },
+    removeCardById: (state, { payload }) => {
+      state.cardByUser = state.cardByUser.filter((e) => e.id !== payload.id);
+    },
     reset: (state, { payload }) => {
       return { ...initialState };
     },
@@ -50,7 +53,13 @@ export const cardSlice = createSlice({
 /*----------------------------------------------------------------------------*/
 /* EXPORTS                                                                    */
 /*----------------------------------------------------------------------------*/
-export const { setCards, updateCardById, setCardsbyUser, addCard, reset } =
-  cardSlice.actions;
+export const {
+  setCards,
+  updateCardById,
+  removeCardById,
+  setCardsbyUser,
+  addCard,
+  reset,
+} = cardSlice.actions;
 
 export default cardSlice.reducer;

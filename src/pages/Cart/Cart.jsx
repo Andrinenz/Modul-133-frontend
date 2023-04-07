@@ -48,13 +48,19 @@ const Cart = () => {
                   <a href="/products">Continue Shopping</a>
                 </h6>
               </div>
-              {cardByUser?.map((card, index) => {
-                return (
-                  <div key={index}>
-                    <ItemInCard data={card} />
-                  </div>
-                );
-              })}
+              {cardByUser.length !== 0 ? (
+                cardByUser?.map((card, index) => {
+                  return (
+                    <div key={index}>
+                      <ItemInCard data={card} />
+                    </div>
+                  );
+                })
+              ) : (
+                <div className="d-flex f-jc mt-3">
+                  <h1>No items in shopping bag yet</h1>
+                </div>
+              )}
             </div>
           </div>
           <div className="cds--col-lg-5 border-bottom-res mt-4 pt-0 pl-0 pr-0 bcol-ibm-white fixed-sidenav">
@@ -65,18 +71,23 @@ const Cart = () => {
               </div>
               <div className="d-flex f-jb mt-2">
                 <span>Shipping</span>
-                <span>25.-</span>
+                <span>{cardByUser.length === 0 ? "0.-" : "25.-"}</span>
               </div>
               <div className="mt-2 border-bottom" />
               <div className="d-flex f-jb mt-2">
                 <h3>Total</h3>
-                <h3 className="text-bold">
-                  {generateTotalAmount(cardByUser) + 25}.-
-                </h3>
+                {cardByUser.length !== 0 ? (
+                  <h3 className="text-bold">
+                    {generateTotalAmount(cardByUser) + 25}.-
+                  </h3>
+                ) : (
+                  <h3 className="text-bold">0.-</h3>
+                )}
               </div>
               <div className="d-flex fd-c f-jc">
                 <Button
                   size="large"
+                  disabled={cardByUser.length === 0 ? true : false}
                   type="primary"
                   onClick={() => navigate("/checkout")}
                   className="mt-4"

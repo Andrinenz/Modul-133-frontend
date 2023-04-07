@@ -7,7 +7,12 @@ import {
   addErrorNotification,
   addSuccessNotification,
 } from "../notification/notificationSlice";
-import { addCard, setCardsbyUser, updateCardById } from "./cardSlice";
+import {
+  addCard,
+  removeCardById,
+  setCardsbyUser,
+  updateCardById,
+} from "./cardSlice";
 
 /*----------------------------------------------------------------------------*/
 /* cardThrunk                                                                 */
@@ -24,6 +29,33 @@ export const fetchCardsFromUser = () => {
       }
     } catch (err) {
       console.log(err);
+    }
+  };
+};
+
+export const fetchDeleteCard = (id) => {
+  return async (dispatch) => {
+    try {
+      const res = await axiosAuth.delete("/api/card/deleteCard", {
+        data: { id },
+      });
+
+      if (res.status === 200) {
+        dispatch(removeCardById({ id }));
+        dispatch(
+          addSuccessNotification({
+            message: res.statusText,
+            description: "Card successfully updated",
+          })
+        );
+      }
+    } catch (err) {
+      dispatch(
+        addErrorNotification({
+          message: "Error",
+          description: "Error while deleting item",
+        })
+      );
     }
   };
 };
