@@ -31,12 +31,29 @@
   z-index: 999;
 }
 
+.item-image {
+  width: 18rem;
+  height: auto;
+}
+
+@media only screen and (max-width: 1185px) {
+  .item-image {
+    width: 16rem;
+    height: auto;
+  }
+}
+
 @media only screen and (max-width: 1055px) {
   .fixed-sidenav {
     position: fixed;
     bottom: 0;
     height: 24rem;
     width: 100%;
+  }
+
+  .item-image {
+    width: 25rem;
+    height: auto;
   }
 
   .margin-res-top {
