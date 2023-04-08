@@ -92,7 +92,12 @@ const CheckoutDone = () => {
                   </div>
                 );
               })}
-              <div className='border-bottom' />
+              <div className='border-bottom-done' />
+              <div className='mt-2 d-flex f-jb'>
+                <h5>Shipping</h5>
+                <h4 className='text-bold'>25.-</h4>
+              </div>
+              <div className='border-bottom-done' />
               <div className='mt-2 d-flex f-jb'>
                 <h3>Total</h3>
                 <h2 className='text-bold'>{orderById.totalAmount}.-</h2>

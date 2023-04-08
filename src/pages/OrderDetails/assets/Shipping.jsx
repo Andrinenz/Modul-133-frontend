@@ -94,6 +94,14 @@ const Shipping = (props) => {
                 </h4>
               </div>
             </div>
+            <div className='d-flex mt-1'>
+              <div>
+                <h4>Cost:</h4>
+              </div>
+              <div>
+                <h4 className='ml-1 text-bold'>25.-</h4>
+              </div>
+            </div>
           </div>
         </div>
       </div>

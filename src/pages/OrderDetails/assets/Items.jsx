@@ -13,8 +13,6 @@ import '../OrderDetails.scss';
 const Items = (props) => {
   const selectedOrder = props.data;
 
-  console.log(selectedOrder);
-
   return (
     <div className='mt-2'>
       <div className='d-flex f-jb fd-r pt-3 bcol-ibm-white pl-4 pr-4 prl'>
