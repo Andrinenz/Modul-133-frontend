@@ -20,6 +20,9 @@ import "./ItemOverview.scss";
 /*----------------------------------------------------------------------------*/
 /* ItemOverview                                                                   */
 /*----------------------------------------------------------------------------*/
+const { createRoot } = ReactDOM;
+const { Rate } = antd;
+const App = () => <Rate allowHalf defaultValue={2.5} />;
 
 const ItemOverview = () => {
   const dispatch = useDispatch();
@@ -50,55 +53,6 @@ const ItemOverview = () => {
   };
 
   return (
-    /*     <>
-      {loadedById ? (
-        <div className="maincontent d-flex">
-          <div className="close">
-            <CloseOutline
-              size={"22"}
-              onClick={() => close()}
-              className="cursor-pointer"
-            />
-          </div>
-          <img className="MainPicture" src={productById?.image} />
-          <div className="PictureTitle">
-            <div className="PictureAuthor">
-              <h1 className="mb-0">{productById?.title}</h1>
-            </div>
-            <div className="PicturePrice">
-              <h2>Price:{productById?.price}.-</h2>
-            </div>
-            <div className="PictureDescription">
-              <h4>{productById?.description}</h4>
-            </div>
-            <div className="PictureReview">
-              <StarFilled />
-              <StarFilled />
-              <StarFilled />
-              <StarFilled />
-              <StarHalf />
-              56
-            </div>
-            <div className="PictureSizeInfo">we recommend size m</div>
-            <div className="PictureSize">
-              <label for="size">Choose a size </label>
-              <select name="size" id="size">
-                <option value="s">S</option>
-                <option value="m">M</option>
-                <option value="l">L</option>
-                <option value="xl">XL</option>
-              </select>
-            </div>
-            <div className="AddToCart">
-              <button classname="ButtonATC">add to Cart</button>
-              <Favorite />
-            </div>
-          </div>
-        </div>
-      ) : (
-        <Loading />
-      )}
-    </> */
     <>
       <div className="main d-flex bcol-ibm-white cds--offset-lg-3 cds--col-lg-10 pl-0 pr-0 mt-6">
         <div className=""></div>
@@ -110,13 +64,10 @@ const ItemOverview = () => {
           <div classname="Description">
             <h3>{productById?.description}</h3>
           </div>
-          <div className="PictureReview">
-            <StarFilled />
-            <StarFilled />
-            <StarFilled />
-            <StarFilled />
-            <StarHalf />
-            56
+            <div id="container" style="padding: 24px" />
+            <script>
+              const mountNode = document.getElementById('container');
+            </script>
           </div>
           <div className="Price">
             <h2>{productById?.price}.-</h2>
