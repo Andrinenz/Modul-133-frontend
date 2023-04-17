@@ -1,77 +1,28 @@
 .Cards {
-}
-
-.Card {
+  display: flex;
   justify-content: center;
-  color: red;
+  justify-items: center;
+  background-color: #fff;
+  height: 18rem;
+  width: 18rem;
+  margin: 2rem;
+  margin-top: 1rem;
+  margin-left: 3rem;
+  border-radius: 2%;
 }
 
 .ProductTitle {
-  margin-left: 43%;
+  color: black;
+  margin-top: 2rem;
 }
 
-.Card1 {
-  background-color: gray;
-  min-width: 25%;
-  height: 15rem;
-  display: inline-flex;
-  margin-top: 4rem;
-  margin-inline: 2rem;
-  margin-left: 5rem;
-  border-radius: 2%;
+.PicturePreview {
+  max-width: fit-content;
+  max-height: 10rem;
 }
-
-.Card2 {
-  background-color: aqua;
-  min-width: 25%;
-  height: 15rem;
-  display: inline-flex;
-  margin-top: 4rem;
-  margin-inline: 2rem;
-  margin-left: 5rem;
-  border-radius: 2%;
+.border-left {
+  border-right: 1px solid #c6c6c6;
 }
-
-.Card3 {
-  background-color: bisque;
-  min-width: 25%;
-  height: 15rem;
-  display: inline-flex;
-  margin-top: -40rem;
-  margin-inline: 2rem;
-  margin-left: 35rem;
-  border-radius: 2%;
-}
-
-.Card4 {
-  background-color: black;
-  min-width: 25%;
-  height: 15rem;
-  display: inline-flex;
-  margin-top: -40rem;
-  margin-inline: 2rem;
-  margin-left: 35rem;
-  border-radius: 2%;
-}
-
-.Card5 {
-  background-color: black;
-  min-width: 25%;
-  height: 15rem;
-  display: inline-flex;
-  margin-top: 4rem;
-  margin-inline: 2rem;
-  margin-left: 65rem;
-  border-radius: 2%;
-}
-
-.Card6 {
-  background-color: black;
-  min-width: 25%;
-  height: 15rem;
-  display: inline-flex;
-  margin-top: -150%;
-  margin-inline: 2rem;
-  margin-left: 65rem;
-  border-radius: 2%;
+.border-right {
+  border-right: 1px solid #c6c6c6;
 }

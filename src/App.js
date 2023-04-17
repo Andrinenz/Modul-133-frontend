@@ -38,7 +38,7 @@ const App = () => {
   const { loaded } = useSelector(getUser);
 
   useEffect(() => {
-    dispatch(login('', '', true));
+    dispatch(login('', '', true, null, dispatch));
   }, [dispatch]);
 
   return (

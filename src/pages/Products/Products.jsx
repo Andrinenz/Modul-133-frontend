@@ -26,24 +26,30 @@ const Products = () => {
   console.log(products);
 
   return (
-    <div className=''>
-      {loaded ? (
-        <div>
-          {products.map((product, index) => {
-            return (
-              <div
-                key={index}
-                className='cursor-pointer
-              '
-                onClick={() => navigate(`/item/${product.id}`)}
-              >
-                <Card data={product} />
-              </div>
-            );
-          })}
-        </div>
-      ) : null}
-    </div>
+    <>
+      <div className='d-flex f-jc'>
+        <h1>Products</h1>
+      </div>
+      <div className='d-flex bx-wrap'>
+        {loaded ? (
+          <div className='d-flex bx-wrap'>
+            {products
+              .filter((product) => product.isArchived === false)
+              .map((product, index) => {
+                return (
+                  <div
+                    key={index}
+                    className='cursor-pointer d-flex'
+                    onClick={() => navigate(`/item/${product.id}`)}
+                  >
+                    <Card data={product} />
+                  </div>
+                );
+              })}
+          </div>
+        ) : null}
+      </div>
+    </>
   );
 };
 

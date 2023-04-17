@@ -1,39 +1,34 @@
 /*----------------------------------------------------------------------------*/
 /* IMPORTS                                                                    */
 /*----------------------------------------------------------------------------*/
-import { useNavigate } from "react-router";
-import "./Cards.scss";
+import './Cards.scss';
+import { Button } from 'antd';
+import { ShoppingCartArrowDown } from '@carbon/icons-react';
 /*----------------------------------------------------------------------------*/
 /* Card                                                                       */
 /*----------------------------------------------------------------------------*/
-
 const Card = (props) => {
   let data = props.data;
-  const navigate = useNavigate();
 
   return (
-    <div className="BackGround">
-      <div className="ProductTitle">
-        <h1>Products</h1>
-      </div>
-      <div className="Cards">
-        <div>
-          <h1 className="Card1">Card test</h1>
-        </div>
-        <div>
-          <h1 className="Card2">Card test2</h1>
-        </div>
-        <div>
-          <h1 className="Card3">Card test2</h1>
-        </div>
-        <div>
-          <h1 className="Card4">Card test2</h1>
-        </div>
-        <div>
-          <h1 className="Card5">Card test2</h1>
-        </div>
-        <div>
-          <h1 className="Card6">Card test2</h1>
+    <div className='d-flex bx-wrap BackGround'>
+      <div className='border-right pl-1 pt-1'></div>
+      <div className='Cards'>
+        <div className='ProductTitle d-flex fd-c f-jc fac'>
+          <h3>{data?.title}</h3>
+          <div className='d-flex f-jb mt-2 cursor-pointer'>
+            <img className='PicturePreview' alt='product' src={data?.image} />
+            <div className='d-flex fd-c'>
+              <div className='ProductPrice ml-2'>
+                <h3>{data?.price}.-</h3>
+              </div>
+              <div className='Review ml-3'>
+                <Button className='ml-2 mt-2'>
+                  <ShoppingCartArrowDown size='24' />
+                </Button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

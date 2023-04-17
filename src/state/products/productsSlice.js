@@ -2,14 +2,14 @@
 /* IMPORTS                                                                    */
 /*----------------------------------------------------------------------------*/
 
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 /*----------------------------------------------------------------------------*/
 /* productslice                                                               */
 /*----------------------------------------------------------------------------*/
 
 export const productsSlice = createSlice({
-  name: 'product',
+  name: "product",
   initialState: {
     loaded: false,
     products: [],
@@ -48,6 +48,10 @@ export const productsSlice = createSlice({
       });
       state.loadedUpdate = false;
     },
+    resetProductById: (state, { payload }) => {
+      state.productById = null;
+      state.loadedById = false;
+    },
   },
 });
 
@@ -59,6 +63,7 @@ export const {
   setProductById,
   deleteProduct,
   addProduct,
+  resetProductById,
   setProducts,
 } = productsSlice.actions;
 

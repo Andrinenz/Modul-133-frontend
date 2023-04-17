@@ -4,7 +4,7 @@
 
 import { Loading } from '@carbon/react';
 import { Button, FloatButton } from 'antd';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router';
 import { getOrder } from '../../state/order/orderSelector';
@@ -37,8 +37,6 @@ const OrderDetails = () => {
   useEffect(() => {
     dispatch(fetchUserOrders());
   }, [dispatch]);
-
-  console.log(selectedOrder);
 
   return (
     <>
