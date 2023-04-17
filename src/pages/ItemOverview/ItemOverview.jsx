@@ -2,32 +2,29 @@
 /* IMPORTS                                                                    */
 /*----------------------------------------------------------------------------*/
 
-import { CloseOutline, ShoppingCart } from "@carbon/icons-react";
-import { Favorite } from "@carbon/icons-react";
-import { StarHalf } from "@carbon/icons-react";
-import { StarFilled } from "@carbon/icons-react";
-import { Image } from "@carbon/icons-react";
-import { Loading } from "@carbon/react";
-import { Button } from "antd";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router";
-import { fetchCreateCard } from "../../state/card/cardThrunk";
-import { getProduct } from "../../state/products/productsSelector";
-import { resetProductById } from "../../state/products/productsSlice";
-import { fetchProductById } from "../../state/products/productsThrunk";
-import "./ItemOverview.scss";
+import { CloseOutline, ShoppingCart } from '@carbon/icons-react';
+import { Loading } from '@carbon/react';
+import { Button, Select } from 'antd';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate, useParams } from 'react-router';
+import { fetchCreateCard } from '../../state/card/cardThrunk';
+import { getProduct } from '../../state/products/productsSelector';
+import { resetProductById } from '../../state/products/productsSlice';
+import { fetchProductById } from '../../state/products/productsThrunk';
+import './ItemOverview.scss';
 /*----------------------------------------------------------------------------*/
 /* ItemOverview                                                                   */
 /*----------------------------------------------------------------------------*/
-const { createRoot } = ReactDOM;
-const { Rate } = antd;
-const App = () => <Rate allowHalf defaultValue={2.5} />;
 
 const ItemOverview = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { id } = useParams("id");
+  const { id } = useParams('id');
+
+  const [data, setData] = useState({
+    choosedSize: '',
+  });
 
   const { productById, loadedById } = useSelector(getProduct);
 
@@ -38,7 +35,7 @@ const ItemOverview = () => {
   console.log(productById);
 
   const close = () => {
-    navigate("/products");
+    navigate('/products');
     dispatch(resetProductById);
   };
 
@@ -46,47 +43,86 @@ const ItemOverview = () => {
     let obj = {
       ItemId: id,
       itemCount: 1,
-      choosedSize: "S",
+      choosedSize: data.choosedSize,
     };
 
     dispatch(fetchCreateCard(obj));
   };
 
+  const handleKeyUp = (event, type, inputType) => {
+    let dataTemp = { ...data };
+    switch (inputType) {
+      case 'dropdown':
+        dataTemp[type] = event === [] ? '' : event;
+        break;
+      default:
+        break;
+    }
+    setData(dataTemp);
+  };
+
+  const generateDropdownItems = (str) => {
+    let data = [];
+
+    const sizes = str.split(',');
+
+    sizes.forEach((size) => {
+      data.push({ value: size, label: size });
+    });
+
+    return data;
+  };
+
   return (
     <>
-      <div className="main d-flex bcol-ibm-white cds--offset-lg-3 cds--col-lg-10 pl-0 pr-0 mt-6">
-        <div className=""></div>
-        <img className="MainPicture" src={productById?.image} />
-        <div className="d-flex fd-c f-jc">
-          <div className="title d-flex f-jc">
-            <h1>{productById?.title}</h1>
+      {loadedById ? (
+        <div>
+          <div className='main d-flex bcol-ibm-white cds--offset-lg-3 cds--col-lg-10 pl-0 pr-0 mt-4'>
+            <img
+              className='MainPicture'
+              alt='product'
+              src={productById?.image}
+            />
+            <div className='d-flex fd-c f-jc'>
+              <div className='title d-flex f-jc'>
+                <h1>{productById?.title}</h1>
+              </div>
+              <div className='Description'>
+                <h3>{productById?.description}</h3>
+              </div>
+              <div id='container' style={{ padding: '24px' }} />
+              <div className='Price'>
+                <h2>{productById?.price}.-</h2>
+              </div>
+              <div>
+                <h5>Size:</h5>
+                <Select
+                  className='w50p'
+                  size='large'
+                  onChange={(e) => handleKeyUp(e, 'choosedSize', 'dropdown')}
+                  options={generateDropdownItems(productById?.size)}
+                />
+              </div>
+              <div className='AddToCar mt-2'>
+                <Button
+                  disabled={data.choosedSize === '' ? true : false}
+                  icon={<ShoppingCart />}
+                  onClick={() => handleOnClick()}
+                >
+                  Add
+                </Button>
+              </div>
+            </div>
           </div>
-          <div classname="Description">
-            <h3>{productById?.description}</h3>
-          </div>
-            <div id="container" style="padding: 24px" />
-            <script>
-              const mountNode = document.getElementById('container');
-            </script>
-          </div>
-          <div className="Price">
-            <h2>{productById?.price}.-</h2>
-          </div>
-
-          <div className="AddToCart">
-            <Button icon={<ShoppingCart />} onClick={() => handleOnClick()}>
-              Add
+          <div className='d-flex f-je mt-3 cds--offset-lg-3 cds--col-lg-10 pl-0 pr-0'>
+            <Button type='primary' size='large' onClick={() => onclose()}>
+              Go back
             </Button>
           </div>
         </div>
-        <div className="close">
-          <CloseOutline
-            size={"22"}
-            onClick={() => close()}
-            className="cursor-pointer"
-          ></CloseOutline>
-        </div>
-      </div>
+      ) : (
+        <Loading />
+      )}
     </>
   );
 };
