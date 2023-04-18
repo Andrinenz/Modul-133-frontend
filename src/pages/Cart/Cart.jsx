@@ -90,7 +90,9 @@ const Cart = () => {
                   disabled={cardByUser.length === 0 ? true : false}
                   type='primary'
                   onClick={() => navigate('/checkout')}
-                  className='mt-4'
+                  className={`${
+                    cardByUser.length === 0 ? 'mt-4' : 'mt-4 button-pulse'
+                  }`}
                 >
                   Proceed to Checkout
                 </Button>

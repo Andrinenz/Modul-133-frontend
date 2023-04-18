@@ -38,7 +38,7 @@ const Checkout = () => {
     const totalAmount = cards
       .map((item) => item.itemCount * parseFloat(item.Item.price))
       .reduce((acc, curr) => acc + curr, 0);
-    return totalAmount;
+    return totalAmount + 25;
   };
 
   let personalInputFields = ['email', 'firstname', 'lastname'];
