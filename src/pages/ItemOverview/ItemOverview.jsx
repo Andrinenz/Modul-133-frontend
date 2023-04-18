@@ -124,7 +124,7 @@ const ItemOverview = () => {
   return (
     <>
       {loadedById && loadedByItem ? (
-        <div>
+        <div className='d-flex f-ac'>
           <div className='main d-flex bcol-ibm-white cds--offset-lg-3 cds--col-lg-10 pl-0 pr-0 mt-4'>
             <img
               className='MainPicture'
