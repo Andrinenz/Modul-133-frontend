@@ -2,6 +2,7 @@
 /* IMPORTS                                                                    */
 /*----------------------------------------------------------------------------*/
 
+import { Loading } from '@carbon/react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
@@ -47,7 +48,9 @@ const Products = () => {
                 );
               })}
           </div>
-        ) : null}
+        ) : (
+          <Loading />
+        )}
       </div>
     </>
   );

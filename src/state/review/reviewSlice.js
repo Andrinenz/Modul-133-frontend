@@ -13,8 +13,10 @@ export const reviewsSlice = createSlice({
   initialState: {
     loaded: false,
     loadedByUser: false,
+    loadedByItem: false,
     reviews: [],
     reviewsByUser: [],
+    reviewByItem: [],
     error: null,
   },
   reducers: {
@@ -29,7 +31,18 @@ export const reviewsSlice = createSlice({
     addReview: (state, { payload }) => {
       state.reviews.push(payload);
     },
-    updateReviewById: (state, { payload }) => {},
+    setReviewByItem: (state, { payload }) => {
+      state.reviewByItem = payload;
+      state.loadedByItem = true;
+    },
+    updateReviewById: (state, { payload }) => {
+      state.reviewByItem = state.reviewByItem.map((review) => {
+        if (review.id === payload.id) {
+          review.rating = payload.rating;
+        }
+        return review;
+      });
+    },
     deleteReview: (state, { payload }) => {
       let { id } = payload;
       state.reviews = state.reviews.filter((e) => e.id === id);
@@ -45,6 +58,7 @@ export const {
   deleteReview,
   addReview,
   setReviews,
+  setReviewByItem,
   setReviewsByUser,
 } = reviewsSlice.actions;
 

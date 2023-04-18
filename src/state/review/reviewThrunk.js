@@ -3,9 +3,11 @@
 /*----------------------------------------------------------------------------*/
 
 import { axiosAuth } from '../../helpers/axios';
+import { addSuccessNotification } from '../notification/notificationSlice';
 import {
   addReview,
   deleteReview,
+  setReviewByItem,
   setReviews,
   setReviewsByUser,
   updateReviewById,
@@ -22,6 +24,20 @@ export const fetchReviewbyId = (id) => {
 
       if (res.data.result) {
         dispatch(setReviewsByUser(res.data.result));
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+export const fetchReviewByItem = (id) => {
+  return async (dispatch) => {
+    try {
+      let res = await axiosAuth.get(`/api/rating/ratingByItem?id=${id}`);
+
+      if (res.data.result) {
+        dispatch(setReviewByItem(res.data.result));
       }
     } catch (err) {
       console.log(err);
@@ -49,8 +65,10 @@ export const fetchUpdateReview = (reviewObj) => {
       if (!reviewObj.id) {
         console.log('No id given');
       }
+      /* 
+      console.log(reviewObj);
 
-      const fields = ['rating', 'comment'];
+      const fields = ['rating', 'id'];
 
       let valid = true;
       Object.keys(reviewObj).forEach((key) => {
@@ -59,13 +77,19 @@ export const fetchUpdateReview = (reviewObj) => {
         }
       });
       if (valid) {
-        return console.log('Field not possible to update order');
-      }
+        return console.log('Field not possible to update rating');
+      } */
 
       const res = await axiosAuth.patch('/api/rating/updateById', reviewObj);
 
       if (res.status === 200) {
         dispatch(updateReviewById(reviewObj));
+        dispatch(
+          addSuccessNotification({
+            message: 'OK',
+            description: 'Rating successfully updated',
+          })
+        );
       }
     } catch (err) {
       console.log(err);
@@ -80,6 +104,12 @@ export const fetchCreateReview = (reviewObj) => {
 
       if (res.data.result) {
         dispatch(addReview(reviewObj));
+        dispatch(
+          addSuccessNotification({
+            message: 'OK',
+            description: 'Rating successfully created',
+          })
+        );
       }
     } catch (err) {
       console.log(err);
